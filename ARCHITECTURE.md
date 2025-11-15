@@ -12,10 +12,11 @@
 4. [Skill System](#skill-system)
 5. [Metaskill System](#metaskill-system)
 6. [Hook System](#hook-system)
-7. [MCP Integration Layer](#mcp-integration-layer)
-8. [Decision Framework](#decision-framework)
-9. [Token Optimization](#token-optimization)
-10. [Extension Patterns](#extension-patterns)
+7. [Auto-Documentation System](#auto-documentation-system)
+8. [MCP Integration Layer](#mcp-integration-layer)
+9. [Decision Framework](#decision-framework)
+10. [Token Optimization](#token-optimization)
+11. [Extension Patterns](#extension-patterns)
 
 ---
 
@@ -763,6 +764,267 @@ fi
 
 **Trigger**: When agent finishes (SubagentStop)
 **Purpose**: Systematic decision documentation
+
+---
+
+## Auto-Documentation System
+
+### Living Documentation Architecture
+
+The auto-documentation system is Conductor's flagship feature - it automatically maintains living documentation with zero manual work.
+
+#### Design Goals
+
+1. **Zero Manual Overhead** - Docs update automatically, never require manual edits
+2. **Always Current** - Docs reflect actual state, never stale
+3. **Session Continuity** - Resume work instantly with full context
+4. **Progressive Disclosure** - Load only needed context (efficient token usage)
+5. **Project Agnostic** - Works for any project type or structure
+
+#### System Components
+
+```
+Auto-Documentation System
+├── Bootstrap Agent (auto-docs-bootstrap)
+│   ├── Initializes doc structure
+│   ├── Creates foundation documents
+│   └── Sets up automation hooks
+│
+├── Maintainer Agent (auto-docs-maintainer)
+│   ├── Updates component docs
+│   ├── Tracks progress
+│   ├── Creates ADR drafts
+│   └── Loads context
+│
+├── Document Templates
+│   ├── PROJECT_OVERVIEW.md
+│   ├── CURRENT_TASK.md
+│   ├── OPEN_QUESTIONS.md
+│   ├── ROADMAP.md
+│   ├── CONSTRAINTS.md
+│   ├── ARCHITECTURE.md
+│   ├── component-template.md
+│   └── work-package-template.md
+│
+└── Automation Hooks
+    ├── update-component-docs.sh
+    ├── update-current-task.sh
+    ├── create-adr-draft.sh
+    └── session-start-context.sh
+```
+
+#### Automation Flow
+
+**1. Code Change Detection (PostToolUse Hook)**
+
+```
+Developer edits code
+    ↓
+PostToolUse(Edit|Write) hook triggers
+    ↓
+update-component-docs.sh runs
+    ↓
+Analyzes changed file for interface changes
+    ↓
+Invokes auto-docs-maintainer agent
+    ↓
+Updates docs/components/[component].md
+    ↓
+Developer gets fresh component docs (automatic!)
+```
+
+**2. Progress Tracking (Stop Hook)**
+
+```
+Session ends / Claude stops responding
+    ↓
+Stop hook triggers
+    ↓
+update-current-task.sh runs
+    ↓
+Reviews conversation for work completed
+    ↓
+Invokes auto-docs-maintainer agent
+    ↓
+Updates CURRENT_TASK.md progress checklist
+    ↓
+Optionally updates PROJECT_OVERVIEW.md if milestone reached
+```
+
+**3. Decision Capture (SubagentStop Hook)**
+
+```
+Agent completes work (e.g., architecture discussion)
+    ↓
+SubagentStop hook triggers
+    ↓
+create-adr-draft.sh runs
+    ↓
+Scans agent output for decision keywords
+    ↓
+If decision detected:
+  ↓
+  Invokes auto-docs-maintainer agent
+  ↓
+  Extracts decision context and consequences
+  ↓
+  Creates docs/decisions/YYYY-MM-DD-[title].md
+  ↓
+  Developer reviews and refines ADR
+```
+
+**4. Context Loading (SessionStart Hook)**
+
+```
+New session begins
+    ↓
+SessionStart hook triggers
+    ↓
+session-start-context.sh runs
+    ↓
+Reads CURRENT_TASK.md, OPEN_QUESTIONS.md
+    ↓
+Reads recent decisions (last 3 ADRs)
+    ↓
+Generates context summary
+    ↓
+Developer immediately knows where they left off
+```
+
+#### Document Lifecycle
+
+**Foundation Documents** (created at bootstrap):
+- `PROJECT_OVERVIEW.md` - High-level status (updates on milestones)
+- `CURRENT_TASK.md` - Active work (updates frequently)
+- `OPEN_QUESTIONS.md` - Living questions (updates as answered)
+- `ROADMAP.md` - Work planning (updates as tasks complete)
+- `CONSTRAINTS.md` - Project boundaries (rarely changes)
+- `ARCHITECTURE.md` - System structure (updates on major changes)
+
+**Generated Documents** (created as needed):
+- `docs/components/[name].md` - Per-component docs (created on first code edit)
+- `docs/decisions/YYYY-MM-DD-[title].md` - ADRs (created when decisions made)
+- `docs/WORK_PACKAGES/[name].md` - Rich task metadata (created for complex features)
+
+#### Progressive Disclosure Pattern
+
+Instead of loading entire codebase:
+
+```
+Level 1: High-Level Context (1-2k tokens)
+  ├── PROJECT_OVERVIEW.md
+  └── ARCHITECTURE.md
+
+Level 2: Current Work (1-2k tokens)
+  ├── CURRENT_TASK.md
+  ├── OPEN_QUESTIONS.md
+  └── Recent decisions (last 3)
+
+Level 3: Specific Components (2-5k tokens)
+  ├── Relevant component docs
+  └── Related ADRs
+
+Level 4: Source Code (5-15k tokens)
+  └── Only files needed for current task
+
+Total: 10-25k tokens (vs 50-100k for naive approach)
+```
+
+This keeps Claude's context window efficient and responses fast.
+
+#### Integration with Other Systems
+
+**Hooks Integration**:
+- Hooks trigger agent invocations
+- Agents read/write docs
+- Docs provide context to agents
+- Circular, self-reinforcing system
+
+**Agent Integration**:
+- All agents reference component docs during analysis
+- code-reviewer reads component interfaces
+- debugger uses ARCHITECTURE.md for system understanding
+- Agents contribute to ADRs when making decisions
+
+**Metaskill Integration**:
+- agent-creator documents new agents in components/
+- skill-creator documents new skills
+- agent-tester validates agents reference correct docs
+
+#### Token Efficiency
+
+**Without auto-docs** (manual context gathering):
+- Session start: "What was I working on?" → Read 10+ files → 30-50k tokens
+- Code review: "What does this component do?" → Search codebase → 20-30k tokens
+
+**With auto-docs** (progressive disclosure):
+- Session start: Read CURRENT_TASK.md → 1k tokens
+- Code review: Read component doc → 500 tokens
+
+**Savings**: 60-80% fewer tokens for context management!
+
+#### User Experience Flow
+
+**Day 1: Bootstrap**
+```
+User: "Bootstrap auto-docs for my SaaS platform"
+System: [Asks 4 questions, creates docs, sets up hooks]
+Time: 2 minutes
+```
+
+**Day 2-N: Automatic Maintenance**
+```
+User: [Codes normally, makes decisions, commits]
+System: [Docs update automatically via hooks]
+Manual work: 0 minutes
+```
+
+**Week Later: Resume**
+```
+User: [Starts new session]
+System: [Loads context summary automatically]
+Result: Instant productivity, zero context loss
+```
+
+#### Design Decisions
+
+**Why hooks instead of agent polling?**
+- Event-driven > polling (more efficient)
+- Hooks are native to Claude Code
+- No background processes needed
+
+**Why separate bootstrap and maintainer agents?**
+- Bootstrap is one-time setup (different concerns)
+- Maintainer runs frequently (needs to be fast)
+- Separation of responsibilities
+
+**Why templates instead of hardcoded docs?**
+- Projects have different needs
+- Users can customize templates
+- Easier to extend for new doc types
+
+**Why progressive disclosure?**
+- Claude's context window is finite
+- Loading everything wastes tokens
+- Hierarchical loading is more efficient
+
+**Why auto-create ADRs?**
+- Decisions get lost in conversation
+- Manual ADR creation has high friction
+- Auto-draft reduces barrier (user just reviews/refines)
+
+#### Future Enhancements
+
+**Planned**:
+- Hook customization UI (adjust sensitivity, disable specific hooks)
+- Multi-language template support (documentation in different languages)
+- Team sync features (conflict resolution for concurrent edits)
+- AI-powered doc search (RAG over all documentation)
+
+**Under Consideration**:
+- Visual documentation (auto-generate diagrams from code)
+- Doc diff summaries (what changed since last session)
+- Documentation quality metrics (completeness, staleness detection)
 
 ---
 
