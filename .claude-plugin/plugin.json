@@ -1,7 +1,7 @@
 {
   "name": "ai-workflow-framework",
   "version": "1.0.0",
-  "description": "Reusable AI-augmented workflow framework with agents, skills, hooks, and MCP integrations for multi-domain cognitive tasks",
+  "description": "Reusable AI-augmented workflow framework with agents, skills, auto-documentation, hooks, and MCP integrations for zero-friction AI-assisted development across multiple domains",
   "author": "AI Workflow Framework Contributors",
   "license": "MIT",
   "homepage": "https://github.com/ducroq/ai-workflow-framework",
@@ -18,7 +18,10 @@
     "ml-workflow",
     "metaskills",
     "hooks",
-    "mcp"
+    "mcp",
+    "auto-documentation",
+    "living-documentation",
+    "progressive-disclosure"
   ],
   "components": {
     "agents": [
@@ -32,7 +35,9 @@
       "agents/security/security-auditor.md",
       "agents/meta/agent-creator.md",
       "agents/meta/skill-creator.md",
-      "agents/meta/agent-tester.md"
+      "agents/meta/agent-tester.md",
+      "agents/meta/auto-docs-bootstrap.md",
+      "agents/meta/auto-docs-maintainer.md"
     ],
     "skills": [
       "skills/software-engineering/refactor-extract-function.md"
@@ -40,20 +45,38 @@
     "hooks": [
       "hooks/auto-format.sh",
       "hooks/suggest-session-state-update.sh",
-      "hooks/suggest-adr.sh"
+      "hooks/suggest-adr.sh",
+      "hooks/update-component-docs.sh",
+      "hooks/update-current-task.sh",
+      "hooks/create-adr-draft.sh",
+      "hooks/session-start-context.sh"
     ],
     "templates": [
       "AGENT-TEMPLATE.md",
-      "SKILL-TEMPLATE.md"
+      "SKILL-TEMPLATE.md",
+      "templates/docs/PROJECT_OVERVIEW.md",
+      "templates/docs/CURRENT_TASK.md",
+      "templates/docs/OPEN_QUESTIONS.md",
+      "templates/docs/ROADMAP.md",
+      "templates/docs/CONSTRAINTS.md",
+      "templates/docs/ARCHITECTURE.md",
+      "templates/docs/component-template.md",
+      "templates/docs/work-package-template.md"
     ],
     "mcp": [
       ".mcp.json"
     ],
     "documentation": [
       "../README.md",
+      "../AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md",
       "../docs/TAXONOMY.md",
       "../docs/HOOKS_GUIDE.md",
       "../docs/MCP_INTEGRATION_GUIDE.md",
+      "../docs/PROJECT_OVERVIEW.md",
+      "../docs/CURRENT_TASK.md",
+      "../docs/OPEN_QUESTIONS.md",
+      "../docs/ROADMAP.md",
+      "../docs/CONSTRAINTS.md",
       "../docs/decisions/ADR-TEMPLATE.md"
     ]
   },

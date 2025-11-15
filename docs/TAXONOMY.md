@@ -67,10 +67,12 @@
 
 ### Agents (Explicit Invocation)
 
-1. **agent-creator** - Create new agents ✅ (already created)
-2. **skill-creator** - Create new skills ✅ (already created)
-3. **agent-tester** - Pressure-test agents ✅ (already created)
-4. **agent-refiner** - Improve existing agents (future)
+1. **agent-creator** - Create new agents ✅ (operational)
+2. **skill-creator** - Create new skills ✅ (operational)
+3. **agent-tester** - Pressure-test agents ✅ (operational)
+4. **auto-docs-bootstrap** - Initialize auto-documentation system ✅ (operational)
+5. **auto-docs-maintainer** - Maintain living documentation (via hooks) ✅ (operational)
+6. **agent-refiner** - Improve existing agents (planned)
 
 ---
 
