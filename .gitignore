@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+desktop.ini
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Claude Code session data
+.claude/cache/
+.claude/tmp/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+venv/
+env/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Secrets & credentials
+*.key
+*.pem
+credentials.json
+secrets.json
+
+# MCP server configurations (may contain sensitive tokens)
+# Uncomment if you don't want to share your specific MCP config
+# .claude/.mcp.json

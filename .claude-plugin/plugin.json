@@ -4,10 +4,10 @@
   "description": "Reusable AI-augmented workflow framework with agents, skills, hooks, and MCP integrations for multi-domain cognitive tasks",
   "author": "AI Workflow Framework Contributors",
   "license": "MIT",
-  "homepage": "https://github.com/your-org/ai-workflow-framework",
+  "homepage": "https://github.com/ducroq/ai-workflow-framework",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/ai-workflow-framework.git"
+    "url": "https://github.com/ducroq/ai-workflow-framework.git"
   },
   "keywords": [
     "agents",

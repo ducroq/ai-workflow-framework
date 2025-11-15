@@ -156,7 +156,7 @@ External tool integration for:
 - Infrastructure (Vercel, Netlify, AWS)
 
 **Relevance**: Could integrate with user's existing systems:
-- Supabase for SANTA project (via MCP)
+- Supabase for existing projects (via MCP)
 - GitHub for issue tracking
 - Notion for documentation
 

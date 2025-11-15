@@ -177,7 +177,7 @@ when_mandatory: true  # Auto-invoked!
 - **Package as plugin** for distribution
 
 ### Phase 2.3 ⏳ DEFERRED
-- **Discuss migration** of SANTA and llm-distillery agents to new structure
+- **Discuss migration** of existing project agents to new structure
 
 ---
 
@@ -196,8 +196,7 @@ when_mandatory: true  # Auto-invoked!
 - Add MCP integrations for common tools
 
 ### Medium-term (This Month)
-- Migrate SANTA agents to new structure
-- Migrate llm-distillery agents to new structure
+- Migrate agents from existing projects to new structure
 - Create output styles (planning-mode, review-mode, debugging-mode)
 - Package as distributable plugin
 
@@ -258,7 +257,7 @@ when_mandatory: true  # Auto-invoked!
 - **README.md** - Complete usage guide
 - **TEST_REPORT.md** - Validation results
 - **TAXONOMY.md** - Agent/skill catalog
-- **AI_AUGMENTED_WORKFLOW.md** - Philosophy (to be created from SANTA/llm-distillery)
+- **AI_AUGMENTED_WORKFLOW.md** - Philosophy (to be created from existing project experiences)
 
 ### Meta-Templates
 - **.claude/AGENT-TEMPLATE.md** - Template for all agents
@@ -281,7 +280,7 @@ when_mandatory: true  # Auto-invoked!
 - ✅ All core agents operational
 
 ### Goals
-- ⏳ Migrate 2 existing projects (SANTA, llm-distillery)
+- ⏳ Migrate agents from existing projects
 - ⏳ Expand to 4+ domains
 - ⏳ Package as distributable plugin
 - ⏳ Add 10+ skills (auto-invoked capabilities)
