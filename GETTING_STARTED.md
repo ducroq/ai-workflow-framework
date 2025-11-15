@@ -58,18 +58,44 @@ Claude: [Launches agent-creator metaskill]
         [Saves to appropriate domain directory]
 ```
 
+### 4. Bootstrap Auto-Documentation (HIGHLY RECOMMENDED)
+
+**The killer feature**: Living documentation that updates automatically!
+
+```
+You: "Bootstrap auto-docs for my task management app with React frontend and FastAPI backend"
+
+Claude: [Launches auto-docs-bootstrap agent]
+        [Asks about your project: vision, phase, constraints]
+        [Creates complete documentation structure]
+        [Sets up automation hooks]
+
+You get:
+✅ PROJECT_OVERVIEW.md - Auto-updated project status
+✅ CURRENT_TASK.md - Real-time progress tracking
+✅ OPEN_QUESTIONS.md - Living question log
+✅ ROADMAP.md - Work planning
+✅ docs/components/ - Auto-maintained component docs
+✅ docs/decisions/ - Auto-created decision records
+
+From now on, docs update automatically as you code!
+```
+
+**Try it now**: The setup takes < 2 minutes and saves hours of documentation work.
+
 ---
 
 ## What Just Happened?
 
 When you installed Conductor, you got:
 
-1. **11 Production-Ready Agents** for software engineering, ML, data science, DevOps, security
-2. **Metaskills** that create and test new agents automatically
-3. **Auto-Formatting Hooks** that format code after every edit
-4. **Documentation Hooks** that suggest session state updates and ADR creation
-5. **MCP Integrations** for GitHub, databases, Figma, Linear, Slack
-6. **Templates** for creating consistent agents and skills
+1. **🔥 Auto-Documentation System** - Living docs that update automatically (zero manual work!)
+2. **13 Production-Ready Agents** for software engineering, ML, data science, DevOps, security, meta-operations
+3. **Metaskills** that create and test new agents automatically (self-improving framework)
+4. **Automation Hooks** that update docs on code changes, decisions, and session events
+5. **Progressive Disclosure** - Smart context loading that never overwhelms Claude's context window
+6. **MCP Integrations** for GitHub, databases, Figma, Linear, Slack (optional)
+7. **Templates** for creating consistent agents, skills, and documentation
 
 ---
 

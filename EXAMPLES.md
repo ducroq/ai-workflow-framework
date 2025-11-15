@@ -12,7 +12,8 @@
 4. [DevOps](#devops)
 5. [Security](#security)
 6. [Cross-Domain Workflows](#cross-domain-workflows)
-7. [Framework Extension](#framework-extension)
+7. [Auto-Documentation](#auto-documentation)
+8. [Framework Extension](#framework-extension)
 
 ---
 
@@ -1006,6 +1007,105 @@ Claude: [Updates docs/SESSION_STATE.md with password reset feature completion]
 **Skills Used**: 1 (test-generator-jest)
 **Hooks Triggered**: 3 (auto-format, suggest-adr, suggest-session-state-update)
 **Outcome**: Feature implemented, reviewed, tested, documented, and deployed with full quality checks
+
+---
+
+## Auto-Documentation
+
+### Example 10: Zero-Friction Documentation for New Project
+
+**Scenario**: Starting a new SaaS project, want living documentation from day one
+
+**Workflow**:
+
+```
+You: "Bootstrap auto-docs for a multi-tenant SaaS platform with:
+- Next.js frontend
+- Node.js/Express backend
+- PostgreSQL database
+- Redis caching"
+
+Claude: [Launches auto-docs-bootstrap agent]
+
+Questions:
+- What's your project vision?
+  → "Build a project management SaaS competing with Asana/Linear"
+
+- Current phase?
+  → "Discovery - just starting architecture design"
+
+- Critical constraints?
+  → "Must support 10k concurrent users, GDPR compliant, mobile-first"
+
+- What are you working on now?
+  → "Designing the authentication and multi-tenancy system"
+
+Claude: [Creates complete documentation structure]
+
+✅ docs/PROJECT_OVERVIEW.md
+✅ docs/ARCHITECTURE.md
+✅ docs/CURRENT_TASK.md
+✅ docs/OPEN_QUESTIONS.md
+✅ docs/ROADMAP.md
+✅ docs/CONSTRAINTS.md
+✅ docs/components/
+✅ docs/decisions/
+✅ docs/WORK_PACKAGES/
+```
+
+**Automatic Documentation in Action**:
+
+```
+# Day 1: You start coding
+You: [Create src/auth/jwt-middleware.js]
+Hook: [update-component-docs.sh triggers]
+Result: docs/components/jwt-middleware.md created automatically
+
+# Day 2: You make architectural decision
+You: "I've decided to use row-level security in PostgreSQL for multi-tenancy
+      because it's simpler than schema-per-tenant"
+Hook: [create-adr-draft.sh triggers]
+Result: docs/decisions/2025-11-15-postgresql-rls-multitenancy.md created
+
+# Day 3: Session continuity
+[New session starts]
+Hook: [session-start-context.sh triggers]
+Claude:
+"📖 Context Summary
+
+Current Task: Implementing multi-tenant authentication
+Progress: JWT middleware complete ✓, RLS setup in progress (40%)
+
+Open Questions:
+- ❗ How to handle tenant isolation in Redis cache? (Critical)
+
+Recent Decisions:
+- 2025-11-15: Using PostgreSQL RLS for multi-tenancy
+
+Suggestion: Continue with Redis caching strategy, then implement user invitation flow."
+
+# Week later: Full context preserved
+You: [Return after a week]
+Claude: [Loads PROJECT_OVERVIEW, CURRENT_TASK, recent decisions]
+        [You're immediately productive - no context loss!]
+```
+
+**What Happened Behind the Scenes**:
+
+1. **PostToolUse Hook** detected new file → updated component docs
+2. **SubagentStop Hook** detected decision in conversation → created ADR
+3. **Stop Hook** updated CURRENT_TASK with progress
+4. **SessionStart Hook** loaded context at session start
+
+**Metrics**:
+- **Setup time**: 2 minutes (one-time)
+- **Manual documentation work**: 0 hours (automated!)
+- **Context recovery time**: < 30 seconds (always instant)
+- **Docs freshness**: 100% (always current)
+
+**Agents Used**: 2 (auto-docs-bootstrap, auto-docs-maintainer via hooks)
+**Hooks Triggered**: 4 (update-component-docs, create-adr-draft, update-current-task, session-start-context)
+**Outcome**: Living documentation that maintains itself - zero manual overhead!
 
 ---
 

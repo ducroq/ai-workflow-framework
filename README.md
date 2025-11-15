@@ -12,9 +12,11 @@
 
 ## What is Conductor?
 
-**Conductor** is a production-ready framework for creating, managing, and deploying specialized AI agents across multiple domains. Think of it as an orchestration layer for AI-augmented workflows - systematizing how you leverage Claude Code for complex cognitive tasks.
+**Conductor** is a production-ready framework for zero-friction AI-augmented development. It provides specialized agents, auto-documentation, and automation hooks that make AI-assisted coding feel effortless.
 
-**Purpose**: Reusable agent and skill infrastructure for software engineering, ML workflows, data science, DevOps, security, and beyond.
+**Purpose**: Reusable agent infrastructure + automatic living documentation for software engineering, ML workflows, data science, DevOps, security, and beyond.
+
+**Core Innovation**: Your documentation updates automatically as you code. Resume work instantly with full context. Zero manual overhead.
 
 ---
 
@@ -23,13 +25,13 @@
 This framework provides a complete system for creating, managing, and using specialized AI agents and skills across multiple domains (software engineering, ML workflows, testing, etc.).
 
 **Key Features**:
-- **Meta-templates** for consistent agent/skill creation
-- **Metaskills** that create and test other agents (self-improving)
-- **Domain-based organization** for scalability
-- **Mandatory skills** (auto-invoked when applicable)
-- **PASS/REVIEW/FAIL decision framework**
-- **Persuasion-informed design** (authority, commitment, social proof)
-- **Pressure testing** methodology
+- **🔥 Auto-Documentation System** - Living docs that update automatically (zero manual work!)
+- **🤖 Specialized Agents** - 13+ agents for code review, debugging, ML workflows, security, etc.
+- **⚡ Automation Hooks** - Trigger updates on code changes, decisions, session events
+- **📚 Progressive Disclosure** - Smart context loading (never overwhelm Claude's context window)
+- **🎯 Meta-Agents** - Agents that create and test other agents (self-improving framework)
+- **✅ PASS/REVIEW/FAIL Framework** - Consistent decision-making across all agents
+- **🔄 Session Continuity** - Resume work instantly with full context recovery
 
 ---
 
@@ -57,18 +59,61 @@ This framework provides a complete system for creating, managing, and using spec
 │   └── ml-workflow/
 │
 ├── AGENT-TEMPLATE.md            ✅ READY
-└── SKILL-TEMPLATE.md            ✅ READY
+├── SKILL-TEMPLATE.md            ✅ READY
+│
+├── hooks/                       # Automation hooks
+│   ├── update-component-docs.sh      ✅ READY
+│   ├── update-current-task.sh        ✅ READY
+│   ├── create-adr-draft.sh           ✅ READY
+│   └── session-start-context.sh      ✅ READY
+│
+└── templates/docs/              # Auto-doc templates
+    ├── PROJECT_OVERVIEW.md
+    ├── CURRENT_TASK.md
+    ├── OPEN_QUESTIONS.md
+    └── ... (full doc system)
 
 docs/
-├── SESSION_STATE.md             # Running project logbook template
-├── TAXONOMY.md                  # Complete catalog of agents and skills
+├── PROJECT_OVERVIEW.md          # Auto-maintained project status
+├── CURRENT_TASK.md              # Auto-tracked current work
+├── OPEN_QUESTIONS.md            # Living question log
+├── ROADMAP.md                   # Auto-updated work planning
+├── AUTO_DOCS_GUIDE.md           # Complete auto-docs guide
+├── TAXONOMY.md                  # Complete catalog of agents
 ├── HOOKS_GUIDE.md               # Hook documentation
-├── MCP_INTEGRATION_GUIDE.md     # MCP setup guide
-└── decisions/
-    └── ADR-TEMPLATE.md          # Architecture Decision Records template
+├── components/                  # Auto-maintained component docs
+└── decisions/                   # Auto-created decision records
 ```
 
-### 2. Using Existing Agents
+### 2. Initialize Auto-Documentation (New Projects)
+
+**The magic feature**: Your docs update automatically as you code!
+
+```bash
+# In your project, say to Claude:
+"Bootstrap auto-docs for my e-commerce platform with React and Node.js"
+
+# Claude creates:
+# ✅ Complete docs structure (PROJECT_OVERVIEW, CURRENT_TASK, etc.)
+# ✅ Automation hooks (updates on code changes, decisions, commits)
+# ✅ Component documentation templates
+# ✅ Architecture Decision Records (ADRs)
+
+# From now on:
+# - Docs stay fresh automatically
+# - Context loads instantly at session start
+# - Zero manual documentation work!
+```
+
+**What you get**:
+- **Automatic updates** when you edit code → component docs refresh
+- **Progress tracking** when session ends → CURRENT_TASK updates
+- **Decision records** when architectural choices made → ADRs created
+- **Context loading** when session starts → instant resumption
+
+See: [AUTO_DOCS_GUIDE.md](docs/AUTO_DOCS_GUIDE.md) for complete guide.
+
+### 3. Using Existing Agents
 
 **Invoke code-reviewer**:
 ```

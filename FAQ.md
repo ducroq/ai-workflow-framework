@@ -697,6 +697,93 @@ jobs:
 
 ---
 
+## Auto-Documentation Questions
+
+### How does auto-documentation work?
+
+**Magic answer**: Hooks detect events (code edits, decisions, session end) and automatically update docs.
+
+**Technical answer**:
+1. **PostToolUse Hook**: Detects code changes → updates component docs
+2. **Stop Hook**: Session ends → updates CURRENT_TASK with progress
+3. **SubagentStop Hook**: Detects decisions → creates ADR drafts
+4. **SessionStart Hook**: New session → loads context summary
+
+**Zero manual work** - docs stay fresh automatically!
+
+### Do I need to use auto-docs?
+
+**No, it's optional** - but highly recommended!
+
+**Without auto-docs**: You still get all 13 agents, skills, hooks, and templates
+**With auto-docs**: You also get living documentation that maintains itself
+
+**Setup time**: < 2 minutes
+**Benefit**: Hours saved on documentation + instant context recovery
+
+**Try it**: `"Bootstrap auto-docs for [your project description]"`
+
+### Will auto-docs mess up my existing documentation?
+
+**No** - bootstrap asks before overwriting anything.
+
+**If you have existing docs**:
+1. Bootstrap creates new structure alongside existing docs
+2. You manually migrate valuable content
+3. Archive old docs to `docs/archive/`
+
+**Best practice**: Use auto-docs for high-level overview (PROJECT_OVERVIEW, CURRENT_TASK), keep technical details in your existing docs, link between them.
+
+### How do I customize what gets auto-documented?
+
+**Edit hooks** in `.claude/hooks/`:
+- `update-component-docs.sh` - Control which files trigger component doc updates
+- `create-adr-draft.sh` - Adjust what counts as a "decision"
+- `update-current-task.sh` - Control progress tracking sensitivity
+
+**Edit templates** in `.claude/templates/docs/`:
+- Customize doc structure and sections
+- Add domain-specific fields
+- Change formatting preferences
+
+### Can I disable auto-docs after enabling it?
+
+**Yes!** Three options:
+
+1. **Disable hooks** - Comment out hooks in `.claude/settings.json`
+2. **Keep docs, stop updates** - Docs become static (manual updates)
+3. **Full removal** - Delete `docs/` directory and hook configs
+
+**Note**: Disabling is easy but you'll lose the automatic updates (and probably miss them!)
+
+### Does auto-docs work for team projects?
+
+**Yes!** But consider:
+
+**Solo developer**: Perfect - context continuity across sessions
+**Small team (2-5)**: Great - shared context, everyone sees current state
+**Large team (6+)**: May need adjustment - lots of concurrent changes
+
+**Team tips**:
+- Use git hooks to sync docs before/after commits
+- Review ADR drafts as team before finalizing
+- Use OPEN_QUESTIONS for team discussion items
+
+### How much does auto-docs cost (tokens)?
+
+**Minimal** - progressive disclosure keeps token usage low:
+
+**Session start context**: ~1-2k tokens (reads overview docs only)
+**Component doc update**: ~500-1k tokens (single file analysis)
+**ADR creation**: ~1-2k tokens (decision extraction)
+
+**Total per day**: ~5-10k tokens for active development
+**Comparison**: Manual context gathering often uses 20-50k tokens!
+
+**Auto-docs actually saves tokens** through smart context management.
+
+---
+
 ## Contributing Questions
 
 ### How can I contribute new agents?
