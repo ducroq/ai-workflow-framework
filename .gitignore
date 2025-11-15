@@ -30,6 +30,20 @@ tmp/
 temp/
 *.tmp
 
+# Sandbox/Experimental - NOT committed (safe space for prototyping)
+sandbox/
+scratch/
+playground/
+experiments/local/
+notebooks/exploratory/
+
+# Experimental file patterns
+*.bak
+*.old
+*_backup.*
+*_test.*
+*_draft.*
+
 # Claude Code session data
 .claude/cache/
 .claude/tmp/
