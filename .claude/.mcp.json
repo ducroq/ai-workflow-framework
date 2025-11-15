@@ -1,0 +1,83 @@
+{
+  "mcpServers": {
+    "github": {
+      "transport": "http",
+      "url": "https://api.github.com",
+      "description": "GitHub API for issues, PRs, repositories",
+      "tools": [
+        "list-issues",
+        "create-issue",
+        "get-pull-request",
+        "create-pull-request",
+        "list-repositories"
+      ],
+      "authentication": {
+        "type": "token",
+        "envVar": "GITHUB_TOKEN"
+      }
+    },
+    "supabase": {
+      "transport": "http",
+      "url": "https://[project].supabase.co",
+      "description": "Supabase database operations",
+      "tools": [
+        "query-table",
+        "insert-row",
+        "update-row",
+        "delete-row"
+      ],
+      "authentication": {
+        "type": "apikey",
+        "envVar": "SUPABASE_KEY"
+      }
+    },
+    "figma": {
+      "transport": "http",
+      "url": "https://api.figma.com/v1",
+      "description": "Figma design file access",
+      "tools": [
+        "get-file",
+        "get-components",
+        "get-comments"
+      ],
+      "authentication": {
+        "type": "token",
+        "envVar": "FIGMA_TOKEN"
+      }
+    },
+    "linear": {
+      "transport": "http",
+      "url": "https://api.linear.app/graphql",
+      "description": "Linear issue tracking",
+      "tools": [
+        "list-issues",
+        "create-issue",
+        "update-issue",
+        "list-projects"
+      ],
+      "authentication": {
+        "type": "apikey",
+        "envVar": "LINEAR_API_KEY"
+      }
+    },
+    "slack": {
+      "transport": "http",
+      "url": "https://slack.com/api",
+      "description": "Slack messaging and notifications",
+      "tools": [
+        "send-message",
+        "list-channels",
+        "get-messages"
+      ],
+      "authentication": {
+        "type": "oauth",
+        "envVar": "SLACK_BOT_TOKEN"
+      }
+    }
+  },
+  "config": {
+    "defaultTimeout": 30000,
+    "retryAttempts": 3,
+    "progressiveDisclosure": true
+  }
+}

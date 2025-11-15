@@ -1,0 +1,32 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "bash .claude/hooks/auto-format.sh \"{{file_path}}\" \"{{tool_name}}\"",
+        "description": "Auto-format code files after edits"
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "command": "bash .claude/hooks/suggest-session-state-update.sh",
+        "description": "Suggest SESSION_STATE.md update after significant work"
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "command": "bash .claude/hooks/suggest-adr.sh \"{{agent_name}}\" \"{{agent_output}}\"",
+        "description": "Suggest ADR creation for architectural decisions"
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(.claude/hooks/*)",
+      "Read(//c/local_dev/temp/**)",
+      "Write(//c/local_dev/temp/**)"
+    ]
+  }
+}

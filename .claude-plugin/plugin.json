@@ -1,0 +1,83 @@
+{
+  "name": "ai-workflow-framework",
+  "version": "1.0.0",
+  "description": "Reusable AI-augmented workflow framework with agents, skills, hooks, and MCP integrations for multi-domain cognitive tasks",
+  "author": "AI Workflow Framework Contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/your-org/ai-workflow-framework",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ai-workflow-framework.git"
+  },
+  "keywords": [
+    "agents",
+    "skills",
+    "ai-augmented",
+    "workflows",
+    "software-engineering",
+    "ml-workflow",
+    "metaskills",
+    "hooks",
+    "mcp"
+  ],
+  "components": {
+    "agents": [
+      "agents/software-engineering/code-reviewer.md",
+      "agents/software-engineering/debugger.md",
+      "agents/software-engineering/refactoring-guide.md",
+      "agents/ml-workflow/oracle-calibration.md",
+      "agents/ml-workflow/dataset-qa.md",
+      "agents/data-science/data-analyzer.md",
+      "agents/devops/deployment-troubleshooter.md",
+      "agents/security/security-auditor.md",
+      "agents/meta/agent-creator.md",
+      "agents/meta/skill-creator.md",
+      "agents/meta/agent-tester.md"
+    ],
+    "skills": [
+      "skills/software-engineering/refactor-extract-function.md"
+    ],
+    "hooks": [
+      "hooks/auto-format.sh",
+      "hooks/suggest-session-state-update.sh",
+      "hooks/suggest-adr.sh"
+    ],
+    "templates": [
+      "AGENT-TEMPLATE.md",
+      "SKILL-TEMPLATE.md"
+    ],
+    "mcp": [
+      ".mcp.json"
+    ],
+    "documentation": [
+      "../README.md",
+      "../docs/TAXONOMY.md",
+      "../docs/HOOKS_GUIDE.md",
+      "../docs/MCP_INTEGRATION_GUIDE.md",
+      "../docs/decisions/ADR-TEMPLATE.md"
+    ]
+  },
+  "dependencies": {
+    "formatters": {
+      "prettier": "optional",
+      "black": "optional",
+      "gofmt": "optional",
+      "rustfmt": "optional"
+    }
+  },
+  "installation": {
+    "hooks": {
+      "post-install": "chmod +x .claude/hooks/*.sh"
+    }
+  },
+  "configuration": {
+    "env_vars": [
+      "GITHUB_TOKEN",
+      "SUPABASE_URL",
+      "SUPABASE_KEY",
+      "FIGMA_TOKEN",
+      "LINEAR_API_KEY",
+      "SLACK_BOT_TOKEN"
+    ]
+  }
+}
