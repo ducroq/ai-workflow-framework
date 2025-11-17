@@ -506,7 +506,7 @@ Then follow the workflow. You'll be shipping quality features in no time!
 ---
 
 **See Also**:
-- [GETTING_STARTED.md](../GETTING_STARTED.md) - General Conductor setup
+- [GETTING_STARTED.md](GETTING_STARTED.md) - General Conductor setup
 - [HOOKS_GUIDE.md](HOOKS_GUIDE.md) - Automation hooks
 - [AUTO_DOCS_GUIDE.md](AUTO_DOCS_GUIDE.md) - Auto-documentation system
 

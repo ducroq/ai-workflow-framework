@@ -2,7 +2,7 @@
 
 ## Overview
 
-The AI Workflow Framework includes a complete **auto-documentation system** that automatically maintains living documentation for your project with zero manual effort. This system is based on the [AI-Augmented Solo Development Framework](../AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md) and provides:
+The AI Workflow Framework includes a complete **auto-documentation system** that automatically maintains living documentation for your project with zero manual effort. This system is based on the [AI-Augmented Solo Development Framework](AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md) and provides:
 
 - **Automatic updates** - Docs stay fresh as you code
 - **Progressive disclosure** - Load only needed context
@@ -362,10 +362,10 @@ The foundation document recommends git-ignored `sandbox/` directories for experi
 
 ## Getting Help
 
-- **Foundation Document**: [AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md](../AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md)
+- **Foundation Document**: [AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md](AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md)
 - **Hooks Guide**: [HOOKS_GUIDE.md](HOOKS_GUIDE.md)
-- **Examples**: [EXAMPLES.md](../EXAMPLES.md)
-- **FAQ**: [FAQ.md](../FAQ.md)
+- **Examples**: [EXAMPLES.md](EXAMPLES.md)
+- **FAQ**: [FAQ.md](FAQ.md)
 
 ---
 

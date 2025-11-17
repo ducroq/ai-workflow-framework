@@ -23,7 +23,7 @@ The framework is production-ready with 13+ agents across 5 domains, complete aut
 - 2025-11-15: Added foundational AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md → Provides philosophical basis
 
 ## Quick Links
-- Architecture: [ARCHITECTURE.md](../ARCHITECTURE.md)
+- Architecture: [ARCHITECTURE.md](ARCHITECTURE.md)
 - Current Task: [CURRENT_TASK.md](CURRENT_TASK.md)
 - Open Questions: [OPEN_QUESTIONS.md](OPEN_QUESTIONS.md)
 - Roadmap: [ROADMAP.md](ROADMAP.md)
