@@ -76,6 +76,32 @@
 
 ---
 
+## Feature Workflow Commands (Slash Commands)
+
+**Purpose**: Persona-based TDD workflow for structured feature development
+
+### Workflow Commands (Sequential Personas)
+
+1. **feature-init** (`/feature-init`) - Product Manager: Gather requirements, create feature directory ✅
+2. **architect** (`/architect`) - System Architect: Design architecture, create task breakdown ✅
+3. **test-first** (`/test-first`) - Test Engineer: Write tests before implementation (TDD) ✅
+4. **implement** (`/implement`) - Implementation Engineer: Minimal code to pass tests ✅
+5. **qa-check** (`/qa-check`) - QA Engineer: Comprehensive quality review (PASS/REVIEW/FAIL) ✅
+6. **document** (`/document`) - Documentation Writer: User/developer/ops documentation ✅
+
+**Workflow**: `/feature-init` → `/architect` → `/test-first` → `/implement` → `/qa-check` → `/document`
+
+**Benefits**:
+- Structured TDD process with clear stages
+- Context-efficient (use `/clear` between personas)
+- Built-in quality review before deployment
+- Comprehensive documentation as standard
+- Plan mode for review before execution
+
+**Documentation**: See [FEATURE_WORKFLOW_GUIDE.md](FEATURE_WORKFLOW_GUIDE.md) and [FEATURE_WORKFLOW_EXAMPLE.md](FEATURE_WORKFLOW_EXAMPLE.md)
+
+---
+
 ## Priority Order for Implementation
 
 **Phase 1 (Core - NOW)**:

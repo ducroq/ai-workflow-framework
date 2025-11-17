@@ -1,16 +1,17 @@
 # Roadmap
 
 ## Now (Current Sprint)
-- Complete auto-documentation system implementation (Risk: Low, Effort: Medium)
-- Test auto-docs in real usage scenarios (Risk: Medium, Effort: Small)
-- Document auto-docs for end users (Risk: Low, Effort: Small)
-- Commit and push to GitHub (Risk: Low, Effort: Small)
+- Test feature workflow in real projects (Risk: Medium, Effort: Medium)
+- Validate auto-docs in production use (Risk: Medium, Effort: Small)
+- Create video walkthrough of feature workflow (Risk: Low, Effort: Medium)
+- Prepare for v1.2.0 release (Risk: Low, Effort: Small)
 
 ## Next (Coming Soon)
-- Create user guide for auto-documentation system
+- Complete F001 Dark Mode Toggle example (all 6 stages)
+- Create additional feature workflow examples
 - Add more example projects using the framework
-- Implement hook customization options
 - Expand agent library (Phase 2 agents)
+- Community feedback and iteration
 
 ## Later (Backlog)
 - Package framework as distributable plugin
@@ -31,7 +32,11 @@
 - [x] Testing and validation (100% pass rate) - 2025-11-15
 - [x] Foundation document integration - 2025-11-15
 - [x] Auto-documentation system design and implementation - 2025-11-15
+- [x] **Feature Workflow System** (6 slash commands with TDD personas) - 2025-11-17
+- [x] **Hooks configuration update** (Claude Code 2.0+ format) - 2025-11-17
+- [x] **Feature workflow example** (F001 Dark Mode Toggle, stages 1-2) - 2025-11-17
+- [x] **Comprehensive workflow documentation** (guide + example walkthrough) - 2025-11-17
 
 ---
 
-**Last Updated:** 2025-11-15 (auto-maintained)
+**Last Updated:** 2025-11-17 (auto-maintained)

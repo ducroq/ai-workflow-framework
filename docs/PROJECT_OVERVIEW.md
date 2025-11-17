@@ -1,22 +1,25 @@
 # Project Overview
 
 ## Vision
-Build a reusable AI-augmented workflow framework with agents, skills, hooks, and auto-documentation that enables zero-friction AI-assisted development across multiple domains (software engineering, ML workflows, data science, security, DevOps).
+Build a reusable AI-augmented workflow framework with agents, skills, hooks, auto-documentation, and structured feature workflows that enables zero-friction AI-assisted development across multiple domains (software engineering, ML workflows, data science, security, DevOps).
 
 ## Current Status
-**Phase:** Production Ready + Expansion
-**Last Updated:** 2025-11-15
+**Phase:** Production Ready + Active Use
+**Last Updated:** 2025-11-17
 
-The framework core is production-ready with 11 operational agents across 5 domains. Now implementing the auto-documentation system from the foundation document to make the framework self-documenting and provide this capability to projects using the framework.
+The framework is production-ready with 13+ agents across 5 domains, complete auto-documentation system, and a new TDD-based feature workflow system with persona-based slash commands.
 
 ## Active Focus Areas
 - [x] Implement full auto-documentation system
-- [ ] Test and validate auto-docs in real usage
-- [ ] Document auto-docs for end users
+- [x] Create feature workflow system (TDD with personas)
+- [x] Test workflow with real example (F001 Dark Mode Toggle)
+- [ ] Validate in real-world projects
 - [ ] Prepare for wider distribution
 
 ## Recent Significant Decisions
-- 2025-11-15: Implemented full auto-documentation system (not just suggestions) → Enables projects to have living documentation
+- 2025-11-17: **Implemented Feature Workflow System** → Structured TDD workflow with 6 personas (PM, Architect, Test Eng, Impl Eng, QA, Doc Writer)
+- 2025-11-17: **Fixed hooks configuration** → Updated to Claude Code 2.0+ format
+- 2025-11-15: Implemented full auto-documentation system → Enables projects to have living documentation
 - 2025-11-15: Added foundational AI_AUGMENTED_SOLO_DEV_FRAMEWORK.md → Provides philosophical basis
 
 ## Quick Links
