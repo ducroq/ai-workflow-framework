@@ -34,6 +34,7 @@ This framework provides a complete system for creating, managing, and using spec
 
 **Key Features**:
 - **🔥 Auto-Documentation System** - Living docs that update automatically (zero manual work!)
+- **🎭 Feature Workflow System** - Structured TDD workflow with persona-based slash commands (NEW!)
 - **🤖 Specialized Agents** - 13+ agents for code review, debugging, ML workflows, security, etc.
 - **⚡ Automation Hooks** - Trigger updates on code changes, decisions, session events
 - **📚 Progressive Disclosure** - Smart context loading (never overwhelm Claude's context window)
@@ -61,6 +62,14 @@ This framework provides a complete system for creating, managing, and using spec
 │       ├── skill-creator.md     ✅ READY
 │       └── agent-tester.md      ✅ READY
 │
+├── commands/                    # Slash commands (NEW!)
+│   ├── feature-init.md          ✅ READY
+│   ├── architect.md             ✅ READY
+│   ├── test-first.md            ✅ READY
+│   ├── implement.md             ✅ READY
+│   ├── qa-check.md              ✅ READY
+│   └── document.md              ✅ READY
+│
 ├── skills/                      # Auto-invoked capabilities
 │   ├── software-engineering/
 │   │   └── refactor-extract-function.md ✅ READY
@@ -75,11 +84,16 @@ This framework provides a complete system for creating, managing, and using spec
 │   ├── create-adr-draft.sh           ✅ READY
 │   └── session-start-context.sh      ✅ READY
 │
-└── templates/docs/              # Auto-doc templates
-    ├── PROJECT_OVERVIEW.md
-    ├── CURRENT_TASK.md
-    ├── OPEN_QUESTIONS.md
-    └── ... (full doc system)
+└── templates/                   # Templates
+    ├── docs/                    # Auto-doc templates
+    │   ├── PROJECT_OVERVIEW.md
+    │   ├── CURRENT_TASK.md
+    │   └── OPEN_QUESTIONS.md
+    └── feature/                 # Feature templates (NEW!)
+        ├── FEATURE.md
+        ├── ARCHITECTURE.md
+        ├── TASKS.md
+        └── STATUS.md
 
 docs/
 ├── PROJECT_OVERVIEW.md          # Auto-maintained project status
@@ -87,10 +101,19 @@ docs/
 ├── OPEN_QUESTIONS.md            # Living question log
 ├── ROADMAP.md                   # Auto-updated work planning
 ├── AUTO_DOCS_GUIDE.md           # Complete auto-docs guide
+├── FEATURE_WORKFLOW_GUIDE.md    # Feature workflow guide (NEW!)
 ├── TAXONOMY.md                  # Complete catalog of agents
 ├── HOOKS_GUIDE.md               # Hook documentation
 ├── components/                  # Auto-maintained component docs
-└── decisions/                   # Auto-created decision records
+├── decisions/                   # Auto-created decision records
+└── features/                    # Feature tracking (NEW!)
+    └── F[XXX]-[name]/           # Each feature has its own directory
+        ├── FEATURE.md
+        ├── ARCHITECTURE.md
+        ├── TASKS.md
+        ├── STATUS.md
+        ├── QA_REPORT.md
+        └── DOCUMENTATION.md
 ```
 
 ### 2. Initialize Auto-Documentation (New Projects)
@@ -121,7 +144,49 @@ docs/
 
 See: [AUTO_DOCS_GUIDE.md](docs/AUTO_DOCS_GUIDE.md) for complete guide.
 
-### 3. Using Existing Agents
+### 3. Feature Workflow System (TDD with Personas)
+
+**NEW**: Structured feature development with Test-Driven Development!
+
+**The workflow**:
+```bash
+/feature-init → /architect → /test-first → /implement → /qa-check → /document
+    (PM)         (Architect)   (Test Eng)    (Impl Eng)    (QA)      (Doc Writer)
+```
+
+**Example Usage**:
+```
+You: "/feature-init"
+Claude: [Asks about requirements, creates docs/features/F001-user-auth/]
+
+You: "/architect"
+Claude: [Designs architecture, creates task breakdown]
+
+You: "/test-first"
+Claude: [Writes comprehensive tests - all failing initially]
+
+You: "/implement"
+Claude: [Implements minimal code - all tests now passing]
+
+You: "/qa-check"
+Claude: [Runs quality checks, creates QA report with PASS/REVIEW/FAIL]
+
+You: "/document"
+Claude: [Creates user & developer documentation]
+
+# ✅ Feature complete with tests, QA approval, and docs!
+```
+
+**Benefits**:
+- **Structured Process** - Clear stages, no guesswork
+- **Test-Driven** - Tests before implementation ensures quality
+- **Context Efficient** - Use `/clear` between stages to save tokens
+- **Quality Focused** - Built-in QA review catches issues early
+- **Well Documented** - Each feature fully documented from start to finish
+
+See: [FEATURE_WORKFLOW_GUIDE.md](docs/FEATURE_WORKFLOW_GUIDE.md) for complete guide.
+
+### 4. Using Existing Agents
 
 **Invoke code-reviewer**:
 ```
@@ -141,7 +206,7 @@ Claude: [Samples 200 articles, runs calibration, analyzes distributions]
 Claude: [Provides PASS/REVIEW/FAIL recommendation with cost estimates]
 ```
 
-### 3. Using Skills (Auto-Invoked)
+### 5. Using Skills (Auto-Invoked)
 
 **Skills activate automatically** when Claude detects applicable scenarios:
 
@@ -155,7 +220,7 @@ Claude: [Performs extraction with before/after examples]
 
 **Note**: Skills are marked `when_mandatory: true` - Claude MUST use them when applicable.
 
-### 4. Creating New Agents
+### 6. Creating New Agents
 
 **Use agent-creator metaskill**:
 
@@ -171,7 +236,7 @@ Claude: [Invokes agent-tester to pressure-test the new agent]
 Claude: "✅ Agent created and tested. Ready for use."
 ```
 
-### 5. Creating New Skills
+### 7. Creating New Skills
 
 **Use skill-creator metaskill**:
 
@@ -185,7 +250,7 @@ Claude: [Saves to .claude/skills/software-engineering/test-generator-jest.md]
 Claude: "✅ Skill created. Will auto-invoke when new functions are created."
 ```
 
-### 6. Pressure Testing Agents
+### 8. Pressure Testing Agents
 
 **Use agent-tester metaskill**:
 
