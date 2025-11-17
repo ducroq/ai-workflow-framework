@@ -52,8 +52,13 @@ Located in `.claude/settings.json`:
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "command": "bash .claude/hooks/auto-format.sh \"{{file_path}}\" \"{{tool_name}}\"",
-        "description": "Auto-format code files after edits"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/auto-format.sh \"{{file_path}}\" \"{{tool_name}}\"",
+            "description": "Auto-format code files after edits"
+          }
+        ]
       }
     ]
   }
@@ -119,14 +124,20 @@ Reminds you to update `docs/SESSION_STATE.md` if it hasn't been updated in > 1 h
   "hooks": {
     "Stop": [
       {
-        "matcher": "*",
-        "command": "bash .claude/hooks/suggest-session-state-update.sh",
-        "description": "Suggest SESSION_STATE.md update after significant work"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/suggest-session-state-update.sh",
+            "description": "Suggest SESSION_STATE.md update after significant work"
+          }
+        ]
       }
     ]
   }
 }
 ```
+
+**Note**: Stop hooks don't use matchers, so the `matcher` field is omitted.
 
 ### Customization
 
@@ -188,14 +199,20 @@ The hook looks for these keywords in agent output:
   "hooks": {
     "SubagentStop": [
       {
-        "matcher": "*",
-        "command": "bash .claude/hooks/suggest-adr.sh \"{{agent_name}}\" \"{{agent_output}}\"",
-        "description": "Suggest ADR creation for architectural decisions"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/suggest-adr.sh \"{{agent_name}}\" \"{{agent_output}}\"",
+            "description": "Suggest ADR creation for architectural decisions"
+          }
+        ]
       }
     ]
   }
 }
 ```
+
+**Note**: SubagentStop hooks don't use matchers, so the `matcher` field is omitted.
 
 ### Customization
 
@@ -320,8 +337,13 @@ Add to `.claude/settings.json`:
     "PostToolUse": [
       {
         "matcher": "Bash",
-        "command": "bash .claude/hooks/log-bash.sh \"{{command}}\" \"{{description}}\"",
-        "description": "Log all bash commands"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/log-bash.sh \"{{command}}\" \"{{description}}\"",
+            "description": "Log all bash commands"
+          }
+        ]
       }
     ]
   }
@@ -352,8 +374,13 @@ Add to `.claude/settings.json`:
     "PreToolUse": [
       {
         "matcher": "Bash:git commit",
-        "command": "bash .claude/hooks/validate-commit.sh \"{{message}}\"",
-        "description": "Validate commit message format"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/validate-commit.sh \"{{message}}\"",
+            "description": "Validate commit message format"
+          }
+        ]
       }
     ]
   }

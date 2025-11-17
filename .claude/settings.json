@@ -3,44 +3,74 @@
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "command": "bash .claude/hooks/auto-format.sh \"{{file_path}}\" \"{{tool_name}}\"",
-        "description": "Auto-format code files after edits"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/auto-format.sh \"{{file_path}}\" \"{{tool_name}}\"",
+            "description": "Auto-format code files after edits"
+          }
+        ]
       },
       {
         "matcher": "Edit|Write",
-        "command": "bash .claude/hooks/update-component-docs.sh \"{{file_path}}\" \"{{tool_name}}\"",
-        "description": "Update component documentation when code changes"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/update-component-docs.sh \"{{file_path}}\" \"{{tool_name}}\"",
+            "description": "Update component documentation when code changes"
+          }
+        ]
       }
     ],
     "Stop": [
       {
-        "matcher": "*",
-        "command": "bash .claude/hooks/suggest-session-state-update.sh",
-        "description": "Suggest SESSION_STATE.md update after significant work"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/suggest-session-state-update.sh",
+            "description": "Suggest SESSION_STATE.md update after significant work"
+          }
+        ]
       },
       {
-        "matcher": "*",
-        "command": "bash .claude/hooks/update-current-task.sh",
-        "description": "Update CURRENT_TASK.md with progress"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/update-current-task.sh",
+            "description": "Update CURRENT_TASK.md with progress"
+          }
+        ]
       }
     ],
     "SubagentStop": [
       {
-        "matcher": "*",
-        "command": "bash .claude/hooks/suggest-adr.sh \"{{agent_name}}\" \"{{agent_output}}\"",
-        "description": "Suggest ADR creation for architectural decisions"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/suggest-adr.sh \"{{agent_name}}\" \"{{agent_output}}\"",
+            "description": "Suggest ADR creation for architectural decisions"
+          }
+        ]
       },
       {
-        "matcher": "*",
-        "command": "bash .claude/hooks/create-adr-draft.sh \"{{agent_name}}\" \"{{agent_output}}\"",
-        "description": "Create ADR draft when decisions detected"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/create-adr-draft.sh \"{{agent_name}}\" \"{{agent_output}}\"",
+            "description": "Create ADR draft when decisions detected"
+          }
+        ]
       }
     ],
     "SessionStart": [
       {
-        "matcher": "*",
-        "command": "bash .claude/hooks/session-start-context.sh",
-        "description": "Load and summarize context at session start"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-start-context.sh",
+            "description": "Load and summarize context at session start"
+          }
+        ]
       }
     ]
   },
