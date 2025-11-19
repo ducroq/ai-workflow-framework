@@ -133,24 +133,140 @@ This allows Claude Code to work with documentation without asking permission eac
 
 ---
 
+## "Just Tell Me What to Copy"
+
+### Minimal Start (Recommended for Everyone)
+
+**Copy just these 4 things:**
+```bash
+.claude/commands/feature-init.md
+.claude/commands/test-first.md
+.claude/commands/implement.md
+.claude/templates/feature/CLAUDE.md
+```
+
+**Why**: Gets you 80% of the value with minimal complexity
+- feature-init: Organizes requirements
+- test-first: Write tests before code
+- implement: Circuit-breaker prevents spinning wheels
+- CLAUDE.md: Persistent project memory
+
+**Try it on one feature, then decide if you want more**
+
+### Progressive Adoption Path
+
+Start minimal, add more as needed:
+
+```
+Week 1: Try the minimal (4 files above)
+  ↓
+Week 2: Add /architect for complex features
+  ↓
+Week 3: Add session-start-context.sh hook if losing context
+  ↓
+Week 4: Add /qa-check and /document if quality/docs matter
+```
+
+**You can stop at any step if it's working for you!**
+
+---
+
+## Choosing What to Use
+
+### Decision Tree: What Should I Adopt?
+
+**Start here** → Answer these questions:
+
+#### Question 1: Are you comfortable with Test-Driven Development?
+
+**Yes, I already do TDD** → Use the full workflow
+**No, but I want to learn** → Start with Strategy 2 (Pilot One Feature)
+**No, and I don't want to** → Use Strategy 3 (Documentation Only)
+
+#### Question 2: How complex are your features?
+
+**Simple (1-2 files, < 100 lines)** → Skip `/architect`, use just:
+- `/feature-init` (define requirements)
+- `/test-first` (write tests)
+- `/implement` (make them pass)
+
+**Medium (3-10 files, collaborative)** → Use core workflow:
+- `/feature-init` → `/architect` → `/test-first` → `/implement`
+
+**Complex (10+ files, multiple integrations)** → Use full workflow:
+- All commands + CLAUDE.md for knowledge capture
+
+#### Question 3: How often do you lose context between sessions?
+
+**Rarely (work on one feature continuously)** → Skip hooks, just use commands
+**Sometimes (daily or weekly breaks)** → Use `session-start-context.sh` hook
+**Frequently (context switching, long breaks)** → Use all hooks + CLAUDE.md
+
+#### Question 4: Working solo or with a team?
+
+**Solo** → Use all persona commands (architect, test-first, qa-check, document)
+**Pair programming** → Use commands, skip /qa-check (pair reviews live)
+**Team (2-4)** → Use commands + CLAUDE.md for knowledge sharing
+**Team (5+)** → Consider per-feature ownership with shared CLAUDE.md
+
+### Quick Recommendations by Scenario
+
+| Your Situation | What to Use | What to Skip |
+|----------------|-------------|--------------|
+| **New project, learning TDD** | feature-init, test-first, implement, templates | architect (for simple features), hooks, qa-check |
+| **Existing project, want to try it** | Pilot with 1 feature: feature-init, test-first, implement | Everything else until validated |
+| **Solo dev, complex features** | Full workflow (all commands + hooks + CLAUDE.md) | Nothing - use it all |
+| **Team project, documentation poor** | CLAUDE.md template only (start simple) | Commands and hooks (add later) |
+| **Quick prototyping, move fast** | Skip everything except `/test-first` for critical paths | feature-init, architect, qa-check, document |
+| **Legacy codebase, adding features** | feature-init + CLAUDE.md for new features only | Don't retrofit old features |
+| **Production app, high quality bar** | Full workflow with emphasis on /qa-check and /document | Nothing - use it all |
+
+### Component Selection Guide
+
+**Always useful** (copy these first):
+- ✅ `/feature-init` - Organizes requirements clearly
+- ✅ `/test-first` - TDD is universally beneficial
+- ✅ `/implement` - Circuit-breaker prevents wasted time
+- ✅ `CLAUDE.md` template - Persistent project memory
+
+**Depends on project complexity**:
+- 🤔 `/architect` - Skip for simple features (< 3 files)
+- 🤔 `/qa-check` - Skip if you have pair programming or team reviews
+- 🤔 `/document` - Skip for internal tools with self-explanatory code
+
+**Depends on workflow preferences**:
+- 🤔 `session-start-context.sh` hook - Skip if you work continuously without breaks
+- 🤔 `validate-docs.sh` hook - Skip if documentation perfection isn't critical
+- 🤔 Auto-update hooks - Skip for now (most complex, least critical)
+
+**Optional enhancements**:
+- ⚙️ `/load-context` - Nice to have for mid-session context refresh
+- ⚙️ `TASKS.md` template - Use if you like detailed task tracking
+- ⚙️ `ROADMAP.md` - Use for multi-feature planning
+
+---
+
 ## For Existing Projects
 
 ### Integration Strategies
 
-**Strategy 1: Full Adoption** (Recommended for active projects)
-- Copy all workflow files
-- Use `/feature-init` for all new work going forward
-- Gradually document existing features as you touch them
+**Strategy 1: Full Adoption** (Recommended for active projects with high complexity)
+- **When**: Production app, solo dev, complex features, lose context often
+- **What**: Copy all workflow files
+- **How**: Use `/feature-init` for all new work going forward
+- **Commitment**: High (learning curve ~1 week)
 
-**Strategy 2: Pilot One Feature**
-- Copy minimal files (feature-init, templates, workflow guide)
-- Try workflow on one new feature
-- Expand if successful
+**Strategy 2: Pilot One Feature** (Recommended for evaluating fit)
+- **When**: Uncertain if workflow suits your project
+- **What**: Copy minimal files (feature-init, test-first, implement, templates)
+- **How**: Try workflow on one new feature, evaluate effectiveness
+- **Commitment**: Low (can abandon if doesn't work)
 
-**Strategy 3: Documentation Only**
-- Start with just CLAUDE.md template
-- Document existing features manually
-- Add slash commands later when comfortable
+**Strategy 3: Documentation Only** (Recommended for legacy projects or non-TDD teams)
+- **When**: Don't want TDD, just want better documentation
+- **What**: Start with just CLAUDE.md template
+- **How**: Document existing features manually, add slash commands later
+- **Commitment**: Very low (just documentation practice)
 
 ### Recommended Approach
 
