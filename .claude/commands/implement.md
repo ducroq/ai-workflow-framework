@@ -51,9 +51,45 @@ Tests have been written that define the expected behavior. Your job is to:
 3. **IMPLEMENT** minimal code to pass one test (or small group)
 4. **TEST** to verify it passes
 5. **REFACTOR** if needed while keeping tests green
-6. **REPEAT** until all tests pass
+6. **REPEAT** until all tests pass (max 7 iterations per test group)
 7. **REVIEW** code for quality and conventions
-8. **UPDATE** STATUS.md
+8. **DOCUMENT** implementation decisions in CLAUDE.md
+9. **UPDATE** STATUS.md
+
+## AI Pair Programming: Effective Prompts
+
+Use these prompt patterns when working with AI:
+
+**Implementation Request Patterns:**
+- "Implement function that passes all these unit tests: [paste tests]"
+- "Write [language] code that satisfies this test specification: [tests]"
+- "Generate implementation for [component] using these tests as spec: [tests]"
+
+**Debugging Pattern (when tests fail):**
+1. Copy test failure output exactly
+2. Say: "These tests are failing: [paste output]. Fix the implementation"
+3. AI analyzes failures and adjusts code
+4. Run tests again
+5. Repeat (track iterations - see Circuit-Breaker below)
+
+## Circuit-Breaker: Iteration Limit
+
+To prevent infinite refinement loops:
+- **Maximum 7 iterations** per test group
+- Track attempts in STATUS.md under current task
+- After 7 iterations without success:
+  - STOP and document the blocker
+  - Review if tests are correct
+  - Consider if architecture needs adjustment
+  - Escalate to architect or test engineer
+
+**Iteration Tracking:**
+```markdown
+Current Implementation: [Component Name]
+- Iteration 1: Initial implementation - 3 tests failing
+- Iteration 2: Fixed validation logic - 1 test failing
+- Iteration 3: Fixed edge case handling - All tests passing ✅
+```
 
 ## CRITICAL Constraints
 
@@ -106,6 +142,7 @@ After implementation, report:
 - Tests Passing: [X] / [Total] (100%)
 - Tests Failing: 0
 - Test Coverage: [XX]%
+- Total Iterations: [X] (avg [X.X] per component)
 
 📁 Files Created/Modified:
 - ✨ Created: [path/to/new/file.js]
@@ -124,6 +161,10 @@ After implementation, report:
 ⚠️ Technical Debt:
 - [Any shortcuts or future improvements needed]
 
+📝 Knowledge Captured:
+- Implementation decisions documented in CLAUDE.md
+- Iteration challenges and solutions recorded
+
 🎯 Next Step: Run `/qa-check` for quality assurance review
 ```
 
@@ -138,7 +179,9 @@ Before finishing:
 - [ ] Variable names are descriptive
 - [ ] No hardcoded values (use constants/config)
 - [ ] Error handling is appropriate
-- [ ] STATUS.md updated
+- [ ] Iteration count is reasonable (< 7 per component)
+- [ ] STATUS.md updated with iteration tracking
+- [ ] CLAUDE.md updated with implementation insights
 
 ## Code Quality Standards
 
@@ -237,11 +280,54 @@ If you genuinely can't make a test pass because:
 - Test expects impossible behavior
 - Test has a bug
 - Architecture is fundamentally flawed
+- Hit 7 iteration limit without resolution
 
 **STOP** and create a blocker in STATUS.md. DO NOT modify the test. The Test Engineer or Architect needs to address it.
+
+Document in CLAUDE.md:
+- **Problem**: What test is failing and why
+- **Attempted Solutions**: What you tried (with iteration numbers)
+- **Root Cause**: Your analysis of the underlying issue
+- **Recommended Fix**: What the Test Engineer/Architect should address
+
+## Knowledge Capture in CLAUDE.md
+
+Document your implementation journey:
+
+**Problem-Solution Pairs:**
+```markdown
+### Problem: [Component] - [Issue]
+**Context**: What I was implementing
+**Problem**: Specific challenge encountered
+**Solution**: How I resolved it
+**Iteration**: On which iteration this was solved
+```
+
+**Failed Approaches:**
+```markdown
+### Tried: [Approach Name]
+**What I tried**: Specific implementation approach
+**Why it failed**: Test results or errors encountered
+**What worked instead**: The successful alternative
+**Lesson**: Key insight for future implementations
+```
+
+**Successful Patterns:**
+```markdown
+### Working Pattern: [Pattern Name]
+**Use case**: When to use this pattern
+**Implementation**: Brief code example or description
+**Tests covered**: Which tests validated this approach
+```
+
+This knowledge base accelerates future implementations and helps the team learn from each feature.
 
 ## Remember
 
 Your goal is **working code that passes tests**, not clever code. Write the simplest thing that could possibly work, then refactor to make it clean. The tests define correctness - your job is to make them green.
+
+**Expect ~80% completion from AI, with ~20% requiring manual refinement.** The circuit-breaker at 7 iterations ensures you don't waste time on fundamentally flawed approaches.
+
+**Human judgment and domain expertise remain essential** - TDD provides structure for productive AI collaboration, not a replacement for thoughtful software engineering.
 
 **Start in PLAN MODE**: Review the failing tests and plan your implementation strategy before writing code.

@@ -36,6 +36,7 @@ With these files (populated from templates):
 - `ARCHITECTURE.md` - Technical design (initial placeholder)
 - `TASKS.md` - Atomic task breakdown (initial placeholder)
 - `STATUS.md` - Current status tracking
+- `CLAUDE.md` - Knowledge base for learnings and decisions
 
 ### 4. Populate FEATURE.md
 
@@ -62,6 +63,12 @@ Use `.claude/templates/feature/FEATURE.md` as the template and fill in:
 - Set current stage to "🎯 Planning"
 - Add initial activity entry
 - Set completion to 10% (requirements gathering done)
+
+**CLAUDE.md**:
+- Copy template
+- Fill in feature name and ID
+- Initialize with placeholder sections
+- Ready for knowledge capture during development
 
 ### 6. Update Project Documentation
 
@@ -93,6 +100,7 @@ After creating the feature, provide:
 - docs/features/F[XXX]-[slug]/ARCHITECTURE.md
 - docs/features/F[XXX]-[slug]/TASKS.md
 - docs/features/F[XXX]-[slug]/STATUS.md
+- docs/features/F[XXX]-[slug]/CLAUDE.md
 
 📋 Next Steps:
 1. Run `/architect` to design the technical architecture
@@ -100,15 +108,18 @@ After creating the feature, provide:
 3. Identify any dependencies or blockers
 
 🎯 Current Stage: Planning (10% complete)
+
+💡 Knowledge Capture: CLAUDE.md is ready to capture learnings throughout development
 ```
 
 ## Quality Checks
 
 Before finishing:
 - [ ] Feature ID is unique
-- [ ] All four core files created
+- [ ] All five core files created (FEATURE, ARCHITECTURE, TASKS, STATUS, CLAUDE)
 - [ ] FEATURE.md has detailed acceptance criteria
 - [ ] STATUS.md reflects current state
+- [ ] CLAUDE.md initialized with feature name and ID
 - [ ] CURRENT_TASK.md updated
 - [ ] User story follows "As a / I want / So that" format
 

@@ -61,10 +61,34 @@ After creating tests:
 
 1. **READ** feature documentation (FEATURE.md, ARCHITECTURE.md)
 2. **EXAMINE** existing codebase for test patterns
-3. **IDENTIFY** all test scenarios (unit, integration, E2E)
-4. **WRITE** comprehensive test suites
-5. **VERIFY** tests can run (they should fail - nothing implemented yet)
-6. **DOCUMENT** what was tested in STATUS.md
+3. **PLAN** test strategy - what needs comprehensive coverage
+4. **VALIDATE** test completeness BEFORE writing
+5. **WRITE** comprehensive test suites
+6. **VERIFY** tests can run (they should fail - nothing implemented yet)
+7. **DOCUMENT** what was tested in STATUS.md and CLAUDE.md
+
+## Pre-Implementation Quality Gates
+
+Before writing tests, validate:
+- [ ] Test completeness against requirements - all acceptance criteria covered?
+- [ ] Mocking strategy defined - which dependencies need mocks?
+- [ ] Performance tests identified - any timing or resource constraints?
+- [ ] Security tests planned - input validation, authentication, authorization?
+- [ ] Edge cases enumerated - boundary conditions, error scenarios?
+
+## AI Pair Programming: Effective Prompts
+
+Use these prompt patterns when working with AI:
+
+**Test-First Prompts:**
+- "Write comprehensive unit tests for a function that [specific behavior]"
+- "Generate tests covering happy path, edge cases, and error conditions for [feature]"
+- "Create test suite for [component] with these specific scenarios: [list]"
+
+**Completeness Check:**
+- "Review these tests against the acceptance criteria - what's missing?"
+- "What edge cases should I add for [component]?"
+- "Are these tests self-documenting and clear?"
 
 ## CRITICAL Constraints
 
@@ -111,16 +135,20 @@ After creating tests, report:
 🎯 Next Step: Run `/implement` to make these tests pass
 ```
 
-## Quality Checks
+## Post-Implementation Quality Gates
 
-Before finishing:
+After writing tests, validate:
 - [ ] All acceptance criteria have corresponding tests
 - [ ] All API endpoints from ARCHITECTURE.md are tested
 - [ ] All components from ARCHITECTURE.md are tested
 - [ ] Edge cases and error handling tested
 - [ ] Tests follow project conventions
 - [ ] Tests can be run (even if failing)
+- [ ] Test coverage is comprehensive (not just happy paths)
+- [ ] Component interactions are tested (integration tests)
+- [ ] Tests are self-documenting with clear names
 - [ ] STATUS.md updated with test details
+- [ ] CLAUDE.md updated with test strategy decisions
 
 ## Test Categories
 
@@ -194,8 +222,21 @@ describe('Feature: User Authentication', () => {
 ❌ **Vague test names** - "test1", "it works" are bad names
 ❌ **Implementing code** - YOU ARE NOT ALLOWED TO IMPLEMENT
 
+## Knowledge Capture
+
+Document your test strategy decisions in CLAUDE.md:
+- **Test Strategy**: Overall approach and coverage plan
+- **Mocking Decisions**: What you mocked and why
+- **Edge Cases**: Non-obvious edge cases you discovered
+- **Patterns Used**: Test patterns from the codebase you followed
+- **Challenges**: Any testing challenges and how you addressed them
+
+This knowledge helps future test engineers and the implementation team.
+
 ## Remember
 
 Your tests ARE the specification. The implementation engineer will make your tests pass. Write clear, comprehensive tests that fully define the expected behavior. When in doubt, write more tests rather than fewer.
+
+**The key is treating TDD as a collaboration framework** - your tests guide AI-generated implementation while maintaining human oversight and design control.
 
 **Start in PLAN MODE**: Review the architecture and plan your test strategy before writing any code.
