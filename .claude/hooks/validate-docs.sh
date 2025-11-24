@@ -121,7 +121,7 @@ validate_status_freshness() {
   fi
 
   # Check if any files in feature directory were modified
-  local modified_in_feature=$(git diff --cached --name-only | grep -c "^$feature_dir/" || echo "0")
+  local modified_in_feature=$(git diff --cached --name-only | grep -c "^$feature_dir/" | head -1 || echo "0")
 
   if [[ $modified_in_feature -gt 0 ]]; then
     # Check if STATUS.md was also updated
@@ -145,7 +145,7 @@ check_decision_log() {
   local feature_dir=$(dirname "$claude_file")
 
   # Check if architecture or implementation files changed
-  local arch_changes=$(git diff --cached --name-only | grep -E "ARCHITECTURE.md|src/|tests/" | grep -c "^$feature_dir/" || echo "0")
+  local arch_changes=$(git diff --cached --name-only | grep -E "ARCHITECTURE.md|src/|tests/" | grep -c "^$feature_dir/" | head -1 || echo "0")
 
   if [[ $arch_changes -gt 0 ]]; then
     # Check if CLAUDE.md has recent decision entries
@@ -166,7 +166,7 @@ for CLAUDE_FILE in $(find docs/features -name "CLAUDE.md" -type f 2>/dev/null); 
   FEATURE_DIR=$(dirname "$CLAUDE_FILE")
 
   # Check if this feature has any modified files
-  MODIFIED_COUNT=$(git diff --cached --name-only | grep -c "^$FEATURE_DIR/" || echo "0")
+  MODIFIED_COUNT=$(git diff --cached --name-only | grep -c "^$FEATURE_DIR/" | head -1 || echo "0")
 
   if [[ $MODIFIED_COUNT -gt 0 ]] || is_modified "$CLAUDE_FILE"; then
     validate_claude_md "$CLAUDE_FILE"
@@ -184,7 +184,7 @@ for STATUS_FILE in $(find docs/features -name "STATUS.md" -type f 2>/dev/null); 
   FEATURE_DIR=$(dirname "$STATUS_FILE")
 
   # Check if this feature has any modified files
-  MODIFIED_COUNT=$(git diff --cached --name-only | grep -c "^$FEATURE_DIR/" || echo "0")
+  MODIFIED_COUNT=$(git diff --cached --name-only | grep -c "^$FEATURE_DIR/" | head -1 || echo "0")
 
   if [[ $MODIFIED_COUNT -gt 0 ]] || is_modified "$STATUS_FILE"; then
     validate_status_md "$STATUS_FILE"

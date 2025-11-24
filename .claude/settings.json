@@ -22,26 +22,6 @@
         ]
       }
     ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/suggest-session-state-update.sh",
-            "description": "Suggest SESSION_STATE.md update after significant work"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/update-current-task.sh",
-            "description": "Update CURRENT_TASK.md with progress"
-          }
-        ]
-      }
-    ],
     "SubagentStop": [
       {
         "hooks": [

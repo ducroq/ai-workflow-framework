@@ -45,25 +45,25 @@ if [[ $ACTIVE_FEATURES -gt 0 ]]; then
       fi
 
       # Get Problem-Solution Pairs count
-      PROBLEMS=$(grep -c "^### Problem:" "$CLAUDE_MD" 2>/dev/null || echo "0")
+      PROBLEMS=$(grep -c "^### Problem:" "$CLAUDE_MD" 2>/dev/null | head -1 || echo "0")
       if [[ $PROBLEMS -gt 0 ]]; then
         echo "   - $PROBLEMS problem-solution pairs documented"
       fi
 
       # Get Failed Approaches count
-      FAILED=$(grep -c "^### Tried:" "$CLAUDE_MD" 2>/dev/null || echo "0")
+      FAILED=$(grep -c "^### Tried:" "$CLAUDE_MD" 2>/dev/null | head -1 || echo "0")
       if [[ $FAILED -gt 0 ]]; then
         echo "   - $FAILED failed approaches documented (avoid these!)"
       fi
 
       # Get Successful Patterns count
-      PATTERNS=$(grep -c "^### Working Pattern:" "$CLAUDE_MD" 2>/dev/null || echo "0")
+      PATTERNS=$(grep -c "^### Working Pattern:" "$CLAUDE_MD" 2>/dev/null | head -1 || echo "0")
       if [[ $PATTERNS -gt 0 ]]; then
         echo "   - $PATTERNS successful patterns identified"
       fi
 
       # Get Architectural Decisions count
-      ADRS=$(grep -c "^### Decision" "$CLAUDE_MD" 2>/dev/null || echo "0")
+      ADRS=$(grep -c "^### Decision" "$CLAUDE_MD" 2>/dev/null | head -1 || echo "0")
       if [[ $ADRS -gt 0 ]]; then
         echo "   - $ADRS architectural decisions recorded"
       fi
@@ -82,7 +82,7 @@ fi
 
 # Check for critical open questions
 if [[ -f "docs/OPEN_QUESTIONS.md" ]]; then
-  CRITICAL=$(grep -A 1 "## Critical" "docs/OPEN_QUESTIONS.md" | grep -c "^\-" 2>/dev/null || echo "0")
+  CRITICAL=$(grep -A 1 "## Critical" "docs/OPEN_QUESTIONS.md" | grep -c "^\-" 2>/dev/null | head -1 || echo "0")
   if [[ $CRITICAL -gt 0 ]]; then
     echo ""
     echo "⚠️  $CRITICAL critical question(s) need attention"
@@ -92,7 +92,7 @@ fi
 # Check for blockers in active features
 BLOCKERS=0
 for STATUS in $(find docs/features -name "STATUS.md" -type f 2>/dev/null); do
-  BLOCKER_COUNT=$(grep -A 5 "## Current Blockers" "$STATUS" | grep -c "^\|" 2>/dev/null || echo "0")
+  BLOCKER_COUNT=$(grep -A 5 "## Current Blockers" "$STATUS" | grep -c "^\|" 2>/dev/null | head -1 || echo "0")
   if [[ $BLOCKER_COUNT -gt 1 ]]; then  # More than just header row
     BLOCKERS=$((BLOCKERS + BLOCKER_COUNT - 1))
   fi
