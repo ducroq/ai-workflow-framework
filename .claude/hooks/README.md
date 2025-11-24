@@ -7,6 +7,7 @@ This directory contains hooks that automate documentation and context management
 ### Session Hooks
 
 #### `session-start-context.sh` (SessionStart)
+**Status**: ✓ Active
 **When**: At the start of every Claude Code session
 **Purpose**: Load project context and suggest next actions
 **Features**:
@@ -40,9 +41,21 @@ Current Task:
    - Run /test-first to create comprehensive tests
 ```
 
+#### Stop Hooks (Disabled)
+**Status**: ⚠️ Disabled (not in settings.json)
+
+The following hooks are currently disabled due to incomplete implementation:
+- `suggest-session-state-update.sh.disabled` - Would suggest SESSION_STATE.md updates after significant work
+- `update-current-task.sh.disabled` - Would update CURRENT_TASK.md when session ends
+
+These can be re-enabled by:
+1. Removing the `.disabled` extension
+2. Adding them back to `.claude/settings.json` under the `Stop` hook configuration
+
 ### Validation Hooks
 
 #### `validate-docs.sh` (PreCommit)
+**Status**: ✓ Active
 **When**: Before git commit
 **Purpose**: Ensure documentation stays synchronized with code changes
 **Validations**:
@@ -65,6 +78,7 @@ git commit --no-verify -m "message"
 ### Progress Tracking Hooks
 
 #### `auto-update-progress.sh` (PostToolUse)
+**Status**: ⚠️ Not Currently Configured
 **When**: After file edits, command execution, slash commands
 **Purpose**: Automatically update CLAUDE.md and STATUS.md
 **Triggers**:
@@ -85,6 +99,7 @@ git commit --no-verify -m "message"
 ```
 
 #### `sync-progress-on-commit.sh` (PostCommit)
+**Status**: ⚠️ Not Currently Configured
 **When**: After successful git commit
 **Purpose**: Sync metrics and progress with committed changes
 **Updates**:
@@ -106,16 +121,39 @@ git commit --no-verify -m "message"
 - Files changed: 2 src, 3 tests
 ```
 
+### Code Quality Hooks
+
+#### `auto-format.sh` (PostToolUse:Edit|Write)
+**Status**: ✓ Active
+**When**: After editing or writing code files
+**Purpose**: Automatically format code files using appropriate formatters
+**Supported Languages**:
+- JavaScript/TypeScript: Prettier or ESLint
+- Python: Black or autopep8
+- Go: gofmt
+- Rust: rustfmt
+- Java: google-java-format
+- Markdown: Prettier
+
+#### `update-component-docs.sh` (PostToolUse:Edit|Write)
+**Status**: ✓ Active
+**When**: After editing or writing source code files
+**Purpose**: Trigger component documentation updates
+**Behavior**: Currently logs the trigger; full implementation pending
+
 ### Decision Capture Hooks
 
-#### `suggest-adr.sh` (PostToolUse - inherited)
-**When**: After significant architectural changes
-**Purpose**: Remind user to document architectural decisions
-**Triggers**: Changes to ARCHITECTURE.md or major refactoring
+#### `suggest-adr.sh` (SubagentStop)
+**Status**: ✓ Active
+**When**: After agent completes architectural work
+**Purpose**: Suggest ADR creation for architectural decisions
+**Triggers**: Agent detects architectural decisions in output
 
-#### `create-adr-draft.sh` (on-demand - inherited)
-**When**: User creates new ADR
-**Purpose**: Generate ADR template with context
+#### `create-adr-draft.sh` (SubagentStop)
+**Status**: ✓ Active
+**When**: After agent completes architectural work
+**Purpose**: Create ADR draft when decisions detected
+**Triggers**: Architectural decisions found in agent output
 
 ## Slash Commands
 
@@ -248,6 +286,24 @@ chmod +x .claude/hooks/*.sh
 
 ### Hook Errors
 Check the hook output in terminal. Most hooks exit gracefully on errors.
+
+### Windows-Specific Issues
+
+**Grep Command Errors**: If you see errors like `syntax error in expression (error token is "0")`, this is caused by `grep -c` returning duplicate output on some Windows environments. Fix by piping through `head -1`:
+
+```bash
+# Before (causes errors)
+COUNT=$(grep -c "pattern" file.txt 2>/dev/null || echo "0")
+
+# After (works correctly)
+COUNT=$(grep -c "pattern" file.txt 2>/dev/null | head -1 || echo "0")
+```
+
+**Disabled Hooks**: Some hooks are disabled (`.disabled` extension) because they were causing errors or are not fully implemented:
+- `suggest-session-state-update.sh.disabled` - Stop hook for SESSION_STATE.md updates
+- `update-current-task.sh.disabled` - Stop hook for CURRENT_TASK.md updates
+
+These can be re-enabled by removing the `.disabled` extension once fully implemented.
 
 ### Documentation Out of Sync
 Run validation manually:
