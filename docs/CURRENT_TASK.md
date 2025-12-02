@@ -6,7 +6,7 @@
 
 ## Context
 - **Why now:** Just implemented feature workflow system, need to test it
-- **Blockers:** None
+- **Blockers:** None (Stop hook errors fixed)
 - **Related:** FEATURE_WORKFLOW_GUIDE.md, docs/features/F001-dark-mode-toggle/
 
 ## Progress
@@ -22,6 +22,7 @@
 - Testing the persona-based workflow validates the design
 - Product Manager persona successfully created feature directory
 - Requirements gathering was thorough and structured
+- Stop hooks were causing errors - removed from user-level settings (~/.claude/settings.json)
 
 ---
 
@@ -48,4 +49,4 @@
 
 ---
 
-**Last Updated:** 2025-11-17 (auto-maintained)
+**Last Updated:** 2025-12-02 (auto-maintained)

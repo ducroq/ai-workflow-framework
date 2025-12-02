@@ -41,16 +41,22 @@ Current Task:
    - Run /test-first to create comprehensive tests
 ```
 
-#### Stop Hooks (Disabled)
-**Status**: ⚠️ Disabled (not in settings.json)
+#### Stop Hooks (Removed)
+**Status**: ❌ Removed from all settings
 
-The following hooks are currently disabled due to incomplete implementation:
+The following hooks have been fully disabled:
 - `suggest-session-state-update.sh.disabled` - Would suggest SESSION_STATE.md updates after significant work
 - `update-current-task.sh.disabled` - Would update CURRENT_TASK.md when session ends
 
-These can be re-enabled by:
-1. Removing the `.disabled` extension
-2. Adding them back to `.claude/settings.json` under the `Stop` hook configuration
+**Why removed**: These hooks caused persistent errors on Windows because:
+1. The script files were renamed to `.disabled` but the hook configuration still referenced the original names
+2. The configuration existed in user-level settings (`~/.claude/settings.json`) which overrode project settings
+
+**Fix applied** (2025-12-02): Removed `Stop` hook configuration from user-level settings.
+
+To re-enable in the future:
+1. Remove the `.disabled` extension from the script files
+2. Add `Stop` hook configuration to `.claude/settings.json` (project-level, not user-level)
 
 ### Validation Hooks
 
@@ -303,7 +309,9 @@ COUNT=$(grep -c "pattern" file.txt 2>/dev/null | head -1 || echo "0")
 - `suggest-session-state-update.sh.disabled` - Stop hook for SESSION_STATE.md updates
 - `update-current-task.sh.disabled` - Stop hook for CURRENT_TASK.md updates
 
-These can be re-enabled by removing the `.disabled` extension once fully implemented.
+**Important**: These Stop hooks have been fully removed from settings (both project and user-level). Simply renaming the files won't re-enable them - you must also add the `Stop` configuration to `.claude/settings.json`.
+
+**User-level vs Project-level Settings**: If hooks are configured in user-level settings (`~/.claude/settings.json`), they override project settings. When disabling hooks, check both locations.
 
 ### Documentation Out of Sync
 Run validation manually:

@@ -17,18 +17,18 @@ fi
 
 # Check if docs/components/ directory exists
 if [[ ! -d "docs/components" ]]; then
-  exit 0  # Auto-docs not initialized yet
+  # Brief indicator that hook ran but no action needed
+  FILENAME=$(basename "$FILE_PATH")
+  echo "[docs] $FILENAME (no docs/components/ dir)"
+  exit 0
 fi
 
 # Extract component name from file path
 COMPONENT_NAME=$(basename "$FILE_PATH" | sed 's/\.[^.]*$//')
 COMPONENT_DOC="docs/components/${COMPONENT_NAME}.md"
 
-# Invoke auto-docs-maintainer to handle the update
-# This is a placeholder - actual implementation would use Claude Code agent invocation
-echo "📝 Component docs update triggered for: $COMPONENT_NAME"
-echo "   File: $FILE_PATH"
-echo "   Action: Analyzing changes to update $COMPONENT_DOC"
+# Brief status output
+echo "[docs] $COMPONENT_NAME"
 
 # TODO: Invoke auto-docs-maintainer agent to:
 # 1. Read the changed file
