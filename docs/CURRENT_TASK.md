@@ -1,51 +1,37 @@
 # Current Task
 
-**What I'm working on:** Testing Feature Workflow System with Dark Mode Toggle
+**What I'm working on:** (awaiting next task)
 
-**Goal:** Validate the new TDD-based feature workflow with a real example
+**Goal:** -
 
 ## Context
-- **Why now:** Just implemented feature workflow system, need to test it
-- **Blockers:** None (Stop hook errors fixed)
-- **Related:** FEATURE_WORKFLOW_GUIDE.md, docs/features/F001-dark-mode-toggle/
+- **Why now:** -
+- **Blockers:** None
+- **Related:** -
 
 ## Progress
-- [x] Feature workflow system created
-- [x] F001 initialized (requirements gathered)
-- [ ] F001 architecture design
-- [ ] F001 tests creation
-- [ ] F001 implementation
-- [ ] F001 QA review
-- [ ] F001 documentation
+- [ ] (next task)
 
 ## Notes/Learnings
-- Testing the persona-based workflow validates the design
-- Product Manager persona successfully created feature directory
-- Requirements gathering was thorough and structured
-- Stop hooks were causing errors - removed from user-level settings (~/.claude/settings.json)
+- -
 
 ---
 
-## Active Features
+## Completed
 
-### F001: Dark Mode Toggle
-**Stage**: 🎯 Planning
+### Feature Workflow System Testing
+**Status**: Done (2025-12-02)
 
-**Progress**: 10%
+**What was achieved**:
+- Validated TDD-based feature workflow with F001 Dark Mode Toggle demo
+- Tested persona-based slash commands (/architect, /test-first, /implement)
+- Fixed hook configuration issues (Stop hooks, visibility)
+- F001 archived to `docs/archive/F001-dark-mode-toggle/`
 
-**Workflow Stage**:
-- [x] ✅ Requirements (FEATURE.md)
-- [ ] 🎯 Architecture (ARCHITECTURE.md)
-- [ ] 🎯 Tests (test files)
-- [ ] 🎯 Implementation (source files)
-- [ ] 🎯 QA Review (QA_REPORT.md)
-- [ ] 🎯 Documentation (DOCUMENTATION.md)
-
-**Current Status**: Requirements complete, ready for architecture design
-
-**Next Action**: Run `/architect` to design technical architecture
-
-**Location**: `docs/features/F001-dark-mode-toggle/`
+**Key learnings**:
+- User-level settings (~/.claude/settings.json) override project settings
+- Hooks need ASCII output for Windows compatibility
+- Demo features should be scoped minimally to validate workflow
 
 ---
 

@@ -19,7 +19,8 @@
       "Bash(fi)",
       "Bash(else echo \"  ✗ Missing\")",
       "Bash(done)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(bash:*)"
     ],
     "deny": [],
     "ask": []
