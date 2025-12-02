@@ -1,7 +1,7 @@
 # Documentation Automation Guide
 
 **Last Updated**: 2025-11-19
-**Version**: 1.0.0
+**Version**: 1.2.0
 
 ---
 

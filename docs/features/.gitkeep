@@ -1,0 +1,6 @@
+# This directory holds active feature development
+
+Each feature gets its own subdirectory: F[XXX]-[name]/
+Use `/feature-init` to create a new feature.
+
+See: docs/FEATURE_WORKFLOW_GUIDE.md for the complete workflow.

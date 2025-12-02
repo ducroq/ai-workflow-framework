@@ -1,24 +1,23 @@
 # Roadmap
 
 ## Now (Current Sprint)
-- Test feature workflow in real projects (Risk: Medium, Effort: Medium)
-- Validate auto-docs in production use (Risk: Medium, Effort: Small)
-- Create video walkthrough of feature workflow (Risk: Low, Effort: Medium)
-- Prepare for v1.2.0 release (Risk: Low, Effort: Small)
+- Use framework on a real project to validate in practice
+- Fix remaining placeholder hooks (implement or remove)
+- Improve cross-platform compatibility (Windows testing)
+- Clean up stale documentation
 
 ## Next (Coming Soon)
-- Complete F001 Dark Mode Toggle example (all 6 stages)
-- Create additional feature workflow examples
+- Package framework as distributable plugin
+- Create video walkthrough of feature workflow
 - Add more example projects using the framework
-- Expand agent library (Phase 2 agents)
 - Community feedback and iteration
 
 ## Later (Backlog)
-- Package framework as distributable plugin
 - Add MCP integrations for common tools (GitHub, databases, APIs)
 - Create video tutorials/demos
 - Build community examples and patterns
-- Expand to more domains (DevOps, documentation, collaboration)
+- Episodic memory enhancements (vector search, auto-archive)
+- Visual workflow builder
 
 ## Completed
 - [x] Framework core structure - 2025-11-15
@@ -36,7 +35,9 @@
 - [x] **Hooks configuration update** (Claude Code 2.0+ format) - 2025-11-17
 - [x] **Feature workflow example** (F001 Dark Mode Toggle, stages 1-2) - 2025-11-17
 - [x] **Comprehensive workflow documentation** (guide + example walkthrough) - 2025-11-17
+- [x] **Feature workflow validation** (F001 demo completed and archived) - 2025-12-02
+- [x] **Windows compatibility fixes** (ASCII output, settings layering) - 2025-12-02
 
 ---
 
-**Last Updated:** 2025-11-17 (auto-maintained)
+**Last Updated:** 2025-12-02 (auto-maintained)

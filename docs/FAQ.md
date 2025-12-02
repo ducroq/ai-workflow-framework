@@ -822,7 +822,7 @@ See `CONTRIBUTING.md` for detailed guidelines.
 Title: code-reviewer misses SQL injection in f-string
 
 Agent: code-reviewer
-Version: Conductor 1.0.0
+Version: Conductor 1.2.0
 
 Input:
 query = f"SELECT * FROM users WHERE id={user_id}"

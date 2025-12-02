@@ -2,7 +2,7 @@
 
 **Purpose**: Step-by-step guide for building features using the Conductor feature workflow system
 
-**Version**: 1.0.0
+**Version**: 1.2.0
 **Date**: 2025-11-17
 
 ---
@@ -513,4 +513,4 @@ Then follow the workflow. You'll be shipping quality features in no time!
 ---
 
 **Last Updated**: 2025-11-17
-**Version**: 1.0.0
+**Version**: 1.2.0

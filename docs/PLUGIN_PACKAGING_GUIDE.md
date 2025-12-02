@@ -437,5 +437,5 @@ Framework is open-source and free to use, modify, and distribute.
 ---
 
 **Last Updated**: 2025-11-15
-**Version**: 1.0.0
+**Version**: 1.2.0
 **Status**: Ready for Distribution

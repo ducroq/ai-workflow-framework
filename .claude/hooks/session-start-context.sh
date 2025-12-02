@@ -8,7 +8,7 @@ if [[ ! -f "docs/CURRENT_TASK.md" ]] && [[ ! -f "docs/PROJECT_OVERVIEW.md" ]]; t
   exit 0  # Auto-docs not initialized yet
 fi
 
-echo "📖 Loading project context..."
+echo "[session] Loading project context..."
 
 # Load CURRENT_TASK.md
 if [[ -f "docs/CURRENT_TASK.md" ]]; then
@@ -22,7 +22,7 @@ fi
 ACTIVE_FEATURES=$(find docs/features -name "CLAUDE.md" 2>/dev/null | wc -l)
 if [[ $ACTIVE_FEATURES -gt 0 ]]; then
   echo ""
-  echo "📚 Active Features with Knowledge Base: $ACTIVE_FEATURES"
+  echo "[features] Active with Knowledge Base: $ACTIVE_FEATURES"
 
   # Find most recently updated feature
   RECENT_FEATURE=$(find docs/features -name "STATUS.md" -type f -exec ls -t {} + 2>/dev/null | head -1)
@@ -30,14 +30,14 @@ if [[ $ACTIVE_FEATURES -gt 0 ]]; then
     FEATURE_DIR=$(dirname "$RECENT_FEATURE")
     FEATURE_NAME=$(basename "$FEATURE_DIR")
 
-    echo "   📍 Most Recent: $FEATURE_NAME"
+    echo "   -> Most Recent: $FEATURE_NAME"
 
     # Load relevant CLAUDE.md sections if exists
     CLAUDE_MD="$FEATURE_DIR/CLAUDE.md"
     if [[ -f "$CLAUDE_MD" ]]; then
       # Extract current development status
       echo ""
-      echo "💡 Recent Context from CLAUDE.md:"
+      echo "[context] From CLAUDE.md:"
 
       # Get Implementation Journey section if exists
       if grep -q "## Implementation Journey" "$CLAUDE_MD"; then
@@ -85,27 +85,36 @@ if [[ -f "docs/OPEN_QUESTIONS.md" ]]; then
   CRITICAL=$(grep -A 1 "## Critical" "docs/OPEN_QUESTIONS.md" | grep -c "^\-" 2>/dev/null | head -1 || echo "0")
   if [[ $CRITICAL -gt 0 ]]; then
     echo ""
-    echo "⚠️  $CRITICAL critical question(s) need attention"
+    echo "[!] $CRITICAL critical question(s) need attention"
   fi
 fi
 
 # Check for blockers in active features
 BLOCKERS=0
 for STATUS in $(find docs/features -name "STATUS.md" -type f 2>/dev/null); do
-  BLOCKER_COUNT=$(grep -A 5 "## Current Blockers" "$STATUS" | grep -c "^\|" 2>/dev/null | head -1 || echo "0")
-  if [[ $BLOCKER_COUNT -gt 1 ]]; then  # More than just header row
-    BLOCKERS=$((BLOCKERS + BLOCKER_COUNT - 1))
+  # Look for actual blocker content (not just "None" or empty)
+  BLOCKER_SECTION=$(grep -A 10 "## Current Blockers" "$STATUS" 2>/dev/null | tail -n +2 | head -10)
+  # Skip if section just says "None" or is empty
+  if [[ -n "$BLOCKER_SECTION" ]] && ! echo "$BLOCKER_SECTION" | grep -qi "^none$\|^-$\|^$"; then
+    # Count table rows (lines starting with |) excluding header
+    TABLE_ROWS=$(echo "$BLOCKER_SECTION" | grep -c "^|" 2>/dev/null || echo "0")
+    if [[ $TABLE_ROWS -gt 2 ]]; then  # More than header + separator
+      BLOCKERS=$((BLOCKERS + TABLE_ROWS - 2))
+    fi
+    # Also count bullet points as blockers
+    BULLET_ROWS=$(echo "$BLOCKER_SECTION" | grep -c "^- " 2>/dev/null || echo "0")
+    BLOCKERS=$((BLOCKERS + BULLET_ROWS))
   fi
 done
 
 if [[ $BLOCKERS -gt 0 ]]; then
   echo ""
-  echo "🚫 $BLOCKERS active blocker(s) across features"
+  echo "[!] $BLOCKERS active blocker(s) across features"
 fi
 
 # Suggest next actions based on current state
 echo ""
-echo "🎯 Next Actions:"
+echo "[next] Actions:"
 
 # Check if we're in a feature directory
 if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -136,7 +145,7 @@ fi
 RECENT_COMMITS=$(git log --oneline -3 2>/dev/null)
 if [[ -n "$RECENT_COMMITS" ]]; then
   echo ""
-  echo "📝 Recent Commits:"
+  echo "[commits] Recent:"
   echo "$RECENT_COMMITS" | sed 's/^/   /'
 fi
 

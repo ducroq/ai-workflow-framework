@@ -5,15 +5,15 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.1.0-blue" alt="Version 1.1.0">
+  <img src="https://img.shields.io/badge/version-1.2.0-blue" alt="Version 1.2.0">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
   <img src="https://img.shields.io/badge/Claude%20Code-required-orange" alt="Claude Code Required">
   <img src="https://img.shields.io/badge/agents-13-purple" alt="13 Agents">
   <img src="https://img.shields.io/badge/auto--docs-enabled-red" alt="Auto-docs Enabled">
 </p>
 
-**Version**: 1.1.0
-**Date**: 2025-11-15
+**Version**: 1.2.0
+**Date**: 2025-12-02
 **License**: MIT
 
 ---
@@ -746,6 +746,6 @@ MIT License - See LICENSE file
 
 ---
 
-**Last Updated**: 2025-11-15
-**Version**: 1.0
+**Last Updated**: 2025-12-02
+**Version**: 1.2.0
 **Status**: ✅ Production Ready

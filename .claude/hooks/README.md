@@ -83,49 +83,27 @@ git commit --no-verify -m "message"
 
 ### Progress Tracking Hooks
 
-#### `auto-update-progress.sh` (PostToolUse)
-**Status**: ⚠️ Not Currently Configured
-**When**: After file edits, command execution, slash commands
-**Purpose**: Automatically update CLAUDE.md and STATUS.md
-**Triggers**:
-- **Write/Edit tools**: Updates timestamps when src/ or tests/ modified
-- **Test execution**: Logs test runs in CLAUDE.md
-- **Slash commands** (/architect, /test-first, /implement, etc.):
-  - Updates STATUS.md with activity entry
-  - Logs workflow milestone in CLAUDE.md
-  - Updates "Last Updated" timestamp
+#### `auto-update-progress.sh`
+**Status**: Implemented but not configured
+**Type**: PostToolUse hook
+**Purpose**: Update CLAUDE.md and STATUS.md timestamps after edits
 
-**Auto-Generated Entries**:
-```markdown
-### 2025-11-19 14:30
-**Stage**: Testing
-**Action**: Test suite created
-**By**: Automated (hook)
-**Details**: Ran /test-first command - comprehensive tests written
+This hook is fully implemented but not wired into settings.json. To enable:
+```json
+{
+  "PostToolUse": [{
+    "matcher": "Write|Edit",
+    "hooks": [{ "type": "command", "command": "bash .claude/hooks/auto-update-progress.sh \"{{tool_name}}\"" }]
+  }]
+}
 ```
 
-#### `sync-progress-on-commit.sh` (PostCommit)
-**Status**: ⚠️ Not Currently Configured
-**When**: After successful git commit
-**Purpose**: Sync metrics and progress with committed changes
-**Updates**:
-- **STATUS.md Metrics**:
-  - Files Modified count
-  - Lines Added count
-  - Lines Removed count
-  - Tests Passing count (if detected in commit message)
-- **CLAUDE.md Implementation Journey**:
-  - Commit hash and timestamp
-  - Work type (Tests, Implementation, or Both)
-  - Commit message summary
-  - Files changed breakdown
+#### `sync-progress-on-commit.sh`
+**Status**: Implemented but not configured
+**Type**: Would be PostCommit hook (not currently supported by Claude Code)
+**Purpose**: Sync metrics with git commits
 
-**Auto-Generated Entries**:
-```markdown
-**Commit a3b4c5d** (2025-11-19 15:45): Implementation + Tests
-- Add theme storage module with localStorage persistence
-- Files changed: 2 src, 3 tests
-```
+This hook is fully implemented but Claude Code doesn't currently support PostCommit hooks. Could be used as a git hook instead.
 
 ### Code Quality Hooks
 
@@ -142,24 +120,26 @@ git commit --no-verify -m "message"
 - Markdown: Prettier
 
 #### `update-component-docs.sh` (PostToolUse:Edit|Write)
-**Status**: ✓ Active
+**Status**: Placeholder (configured but minimal)
 **When**: After editing or writing source code files
-**Purpose**: Trigger component documentation updates
-**Behavior**: Currently logs the trigger; full implementation pending
+**Purpose**: Would trigger component documentation updates
+**Current Behavior**: Logs when triggered, but doesn't actually update docs
+**Future**: Could invoke auto-docs-maintainer agent to update component docs
 
 ### Decision Capture Hooks
 
 #### `suggest-adr.sh` (SubagentStop)
-**Status**: ✓ Active
-**When**: After agent completes architectural work
-**Purpose**: Suggest ADR creation for architectural decisions
-**Triggers**: Agent detects architectural decisions in output
+**Status**: Active (suggestion only)
+**When**: After subagent completes work
+**Purpose**: Suggest ADR creation when architectural decisions detected
+**Behavior**: Prints suggestion message if decision keywords found in output
 
 #### `create-adr-draft.sh` (SubagentStop)
-**Status**: ✓ Active
-**When**: After agent completes architectural work
-**Purpose**: Create ADR draft when decisions detected
-**Triggers**: Architectural decisions found in agent output
+**Status**: Placeholder (detection only)
+**When**: After subagent completes work
+**Purpose**: Would auto-create ADR drafts
+**Current Behavior**: Logs detection message only, doesn't create files
+**Future**: Could invoke auto-docs-maintainer to create ADR draft
 
 ## Slash Commands
 
@@ -191,9 +171,37 @@ Architecture Complete
 2. Focus on ThemeStorage unit tests first (localStorage integration)
 ```
 
+## Settings Hierarchy
+
+Claude Code uses a layered settings system. Understanding this prevents configuration issues:
+
+```
+~/.claude/settings.json     (User-level - applies to ALL projects)
+        ↓ overrides
+.claude/settings.json       (Project-level - this repo only)
+        ↓ overrides
+.claude/settings.local.json (Local - gitignored, personal preferences)
+```
+
+**Important**: User-level settings OVERRIDE project settings for hooks. If you configure a hook at user-level, it will run even if the project doesn't have it.
+
+**Common Issues**:
+- Hook errors referencing missing files → Check user-level settings for stale config
+- Hooks running that shouldn't → User settings may have extra hooks configured
+- Hooks not running → May be overridden or not configured at any level
+
+**Debugging**:
+```bash
+# Check user-level hooks
+cat ~/.claude/settings.json | grep -A 20 '"hooks"'
+
+# Check project-level hooks
+cat .claude/settings.json | grep -A 20 '"hooks"'
+```
+
 ## Hook Configuration
 
-All hooks are automatically executed by Claude Code. No manual configuration needed.
+Hooks are configured in settings.json files (see hierarchy above).
 
 ### Disabling Hooks Temporarily
 

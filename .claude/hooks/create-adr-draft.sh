@@ -15,14 +15,9 @@ DECISION_KEYWORDS="chose|decided|selected|going with|using|adopting"
 
 # Check if agent output contains decision indicators
 if echo "$AGENT_OUTPUT" | grep -qiE "$DECISION_KEYWORDS"; then
-  echo "🎯 Decision detected in $AGENT_NAME output"
-  echo "   Creating ADR draft..."
-
-  # TODO: Invoke auto-docs-maintainer agent to:
-  # 1. Extract decision from agent output
-  # 2. Identify context and consequences
-  # 3. Create ADR draft with date stamp
-  # 4. Notify developer for review
+  echo "[adr] Decision detected in $AGENT_NAME output"
+  # Note: Auto-creation not yet implemented. Manual ADR creation recommended.
+  # Future: Could invoke auto-docs-maintainer agent to create draft
 fi
 
 exit 0

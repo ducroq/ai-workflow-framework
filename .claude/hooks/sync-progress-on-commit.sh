@@ -2,7 +2,7 @@
 # Hook: PostCommit - Sync progress tracking with git commits
 # Updates CLAUDE.md and STATUS.md based on committed changes
 
-echo "📊 Syncing progress with commit..."
+echo "[sync] Progress with commit..."
 
 # Get commit message and changed files
 COMMIT_MSG=$(git log -1 --pretty=%B)
@@ -167,6 +167,6 @@ if echo "$COMMIT_MSG" | grep -qE "test.*pass|tests.*passing|all tests pass"; the
   fi
 fi
 
-echo "   ✅ Progress synced for $FEATURE_NAME"
+echo "   [ok] Progress synced for $FEATURE_NAME"
 
 exit 0

@@ -874,6 +874,6 @@ Thank you for contributing to Conductor!
 
 ---
 
-**Version**: 1.0.0
+**Version**: 1.2.0
 **Last Updated**: 2025-11-15
 **License**: MIT
